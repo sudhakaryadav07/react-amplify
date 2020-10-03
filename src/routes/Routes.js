@@ -11,7 +11,7 @@ class PublicRoutes extends Component {
         window.onpopstate = function (event) { history.go(1); };
         return (
             <Switch>
-                <Route exact path="/home" component={HomeScreen} />
+                <Route exact path="/" component={HomeScreen} />
                 <Route exact path="/blog" component={BlogScreen} />
             </Switch>
         );
