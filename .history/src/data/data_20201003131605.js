@@ -1,0 +1,80 @@
+const MESSAGES = [
+    "Vow to stop worrying and start loving.",
+    "Believe it’s possible to be at peace.",
+    "One day or day one. It's your decision.",
+    "Try to be a rainbow in someone else's cloud.",
+    "You do not find the happy life. You make it.",
+    "The most wasted of days is one without laughter.",
+    "It is never too late to be what you might have been.",
+    "You get what you give.",
+    "Happiness is not by chance, but by choice.",
+    "Life changes very quickly, in a very positive way, if you let it."
+];
+
+const USER = [
+    {
+        name: "Julie Sweet",
+        title: "CEO, Accenture",
+        shortSummary:"Julie Sweet is an American business executive. She is chief executive officer of Accenture, a multinational professional services company."
+    },
+    {
+        name: "Christine Lagarede",
+        title: "President, European Central Bank",
+        shortSummary:"Christine Madeleine Odette Lagarde is a French politician and lawyer serving as President of the European Central Bank since November 2019."
+    },
+    {
+        name: "Aileen Lee",
+        title: "Founder, Cowboy Ventures",
+        shortSummary:"Aileen Lee (born 1970) is a U.S. seed investor. A venture capital investor, she is the founder of Cowboy Ventures."
+    },
+    {
+        name: "Angela Merkel",
+        title: "Chancellor, Germany",
+        shortSummary:"Angela Dorothea Merkel(born 17 July 1954) is a German politician who has been Chancellor of Germany since 2005."
+
+    },
+    {
+        name: "Nancy Pelosi",
+        title: "Speaker, United States",
+        shortSummary:"Nancy Patricia Pelosi is an American politician serving as a congresswoman from California and the speaker of the United States House of Representatives."
+
+    },
+    {
+        name: "Ursula von der Leyen",
+        title: "President, European Union",
+        shortSummary:"Aileen Lee (born 1970) is a U.S. seed investor. A venture capital investor, she is the founder of Cowboy Ventures."
+
+    },
+    {
+        name: "Mary Barra",
+        title: "CEO, General Motors",
+        shortSummary:"Aileen Lee (born 1970) is a U.S. seed investor. A venture capital investor, she is the founder of Cowboy Ventures."
+
+    },
+    {
+        name: "Melinda Gates",
+        title: "Co-Chair, Bill & Melinda Gates Foundation",
+        shortSummary:"Aileen Lee (born 1970) is a U.S. seed investor. A venture capital investor, she is the founder of Cowboy Ventures."
+
+    },
+    {
+        name: "Abigail Johnson",
+        title: "CEO, Fidelity Investments",
+        shortSummary:"Aileen Lee (born 1970) is a U.S. seed investor. A venture capital investor, she is the founder of Cowboy Ventures."
+
+    },
+    {
+        name: "Oprah Winfrey",
+        title: "Entrepreneur, Personality, Philanthropist",
+        shortSummary:"Aileen Lee (born 1970) is a U.S. seed investor. A venture capital investor, she is the founder of Cowboy Ventures."
+
+    },
+    {
+        name: "Rihanna",
+        title: "Musician",
+        shortSummary:"Aileen Lee (born 1970) is a U.S. seed investor. A venture capital investor, she is the founder of Cowboy Ventures."
+
+    }
+]
+
+export { MESSAGES, USER }

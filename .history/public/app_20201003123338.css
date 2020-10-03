@@ -1,0 +1,11 @@
+body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+}
+
+::-webkit-scrollbar {
+  width: 1px !important;
+}
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+}
