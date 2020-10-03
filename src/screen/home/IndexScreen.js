@@ -21,11 +21,7 @@ const materialStyles = (theme) => ({
     root: {
         display: 'flex',
         overflow: 'hidden',
-        marginTop: theme.spacing(6),
-        // backgroundColor: theme.palette.secondary.light,
-        background: '#d3cce3',
         background: '-webkit-linear-gradient(to right, #d3cce3, #e9e4f0)',
-        background: 'linear-gradient(to right, #d3cce3, #e9e4f0)'
     },
     container1: {
         marginTop: theme.spacing(3),
@@ -36,7 +32,7 @@ const materialStyles = (theme) => ({
     },
     container: {
         marginTop: theme.spacing(15),
-        marginBottom: theme.spacing(30),
+        marginBottom: theme.spacing(2),
         display: 'flex',
         position: 'relative',
     },
@@ -44,8 +40,7 @@ const materialStyles = (theme) => ({
         pointerEvents: 'none',
         position: 'absolute',
         top: -69,
-        left: -53,
-        // width:'100%'
+        left: -53
     },
 })
 
@@ -53,7 +48,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchInput: "",
+            search: "",
+            intrest: "",
             gKeyLoader: false,
             users: USER,
             message: "Vow to stop worrying and start loving."
@@ -61,7 +57,7 @@ class Home extends Component {
     }
 
     UNSAFE_componentWillMount() {
-        // this.initState();
+        this.initState();
     }
 
     initState = () => {
@@ -78,11 +74,31 @@ class Home extends Component {
 
     resetComponent = async (key) => this.setState({ [key]: null });
 
-    handleSearch = (e) => {
+    handleChange = (e) => {
         try {
             this.refreshComponent('gKeyLoader');
-            this.setState({ searchInput: e.target.value });
-            let filteredUser = USER.filter(item => item.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()));
+            let filteredUser = [];
+
+            if (e.target.name === "search") {
+                this.setState({ search: e.target.value });
+                filteredUser = USER.filter(item =>
+                    item.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
+                );
+
+            } else {
+                this.setState({ intrest: e.target.value });
+                filteredUser = USER.filter(item => {
+                    let intrest = item.intrest.filter(data =>
+                        data.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
+                    )
+                    if (intrest.length > 0) {
+                        return item;
+                    }
+                    return null;
+                }
+                );
+                console.log(filteredUser)
+            }
             this.setState({ users: filteredUser });
             this.resetComponent('gKeyLoader');
         } catch (e) {
@@ -101,6 +117,7 @@ class Home extends Component {
         return users.map((data, i) => {
             return (
                 <UserCard
+                    key={i}
                     i={i}
                     data={data}
                 />
@@ -119,42 +136,49 @@ class Home extends Component {
 
     render() {
         let { classes } = this.props;
-        let { message, searchInput } = this.state;
+        let { message, intrest, search } = this.state;
         return (
             <Fragment>
                 {this.renderAppBar()}
                 <section className={classes.section1}>
                     <img
-                        src={require('../../icons/inspire.png')}
+                        src={require('../../icons/inspire.jpg')}
                         alt="wonder"
                         width="100%"
-                        height="600"
-                        style={{ position: 'absolute', opacity: 0.7 }}
+                        height="700"
+                        style={{ position: 'absolute', opacity: 0.9 }}
                     />
                     <Typography color="textSecondary" style={{
                         opacity: 1,
-                        animation: 'fade 2s linear', position: 'relative', top: '1%', left: '30%', fontFamily: 'Forte', fontSize: 33, color: '#2d2c2b'
+                        animation: 'fade 2s linear', position: 'relative', top: '11%', left: '40%', fontFamily: 'Forte', fontSize: 33, color: '#2d2c2b'
                     }}>
                         {message ? message : ""}
                     </Typography>
-
                 </section>
                 <section className={classes.root}>
                     <Container className={classes.container}>
                         <Grid container >
-                            <Grid container sm={11} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <Grid container item sm={11} style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <TextField
-                                    style={{ width: '30%', marginRight: '-2%' }}
+                                    style={{ width: '30%', marginLeft: '7%' }}
                                     size="small"
-                                    name="searchInput"
-                                    value={searchInput}
+                                    name="intrest"
+                                    value={intrest}
+                                    id="outlined-basic"
+                                    label="Intrest"
+                                    variant="outlined"
+                                    onChange={this.handleChange} />
+                                <TextField
+                                    style={{ width: '30%', marginRight: '-1.9%' }}
+                                    size="small"
+                                    name="search"
+                                    value={search}
                                     id="outlined-basic"
                                     label="Inspiring Name"
                                     variant="outlined"
-                                    onChange={this.handleSearch} />
+                                    onChange={this.handleChange} />
                             </Grid>
-
-                            <Grid container sm={12} style={{ justifyContent: 'center' }}>
+                            <Grid container item sm={12} style={{ justifyContent: 'center' }}>
                                 {this.renderUser()}
                             </Grid>
                         </Grid>

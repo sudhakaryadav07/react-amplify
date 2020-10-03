@@ -17,7 +17,7 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: 'white',
+        backgroundColor: 'ghostwhite',
     },
     container: {
         marginTop: theme.spacing(8),
@@ -80,6 +80,7 @@ export default function AppFooter() {
                             container
                             direction="column"
                             justify="center"
+                            alignItems='center'
                             className={classes.iconsWrapper}
                             spacing={2}
                         >
@@ -90,7 +91,7 @@ export default function AppFooter() {
                                 <a href="https://twitter.com/MaterialUI" className={classes.icon} style={{ marginLeft: '5%' }}>
                                     <img src={require('../icons/facebook.png')} height={40} width={40} alt="Facebook" />
                                 </a>
-                                <a href="https://twitter.com/MaterialUI" className={classes.icon} style={{ marginLeft: '5%' }}>
+                                <a href="https://twitter.com/MaterialUI" className={classes.icon} style={{ marginLeft: '10%' }}>
                                     <img src={require('../icons/instagram.png')} height={40} width={40} alt="Instagram" />
                                 </a>
                             </Grid>
@@ -99,23 +100,38 @@ export default function AppFooter() {
                             </Grid>
                         </Grid>
                     </Grid>
+
                     <Grid item md={4}>
-                        <Typography variant="h6" marked="left" gutterBottom>
-                            Legal
-            </Typography>
-                        <ul className={classes.list}>
-                            <li className={classes.listItem}>
-                                <Link href="/premium-themes/onepirate/terms/">Terms</Link>
-                            </li>
-                            <li className={classes.listItem}>
-                                <Link href="/premium-themes/onepirate/privacy/">Privacy</Link>
-                            </li>
-                        </ul>
+                        <Grid container
+                            direction="column"
+                            justify="center"
+                            alignItems='center'
+                            className={classes.iconsWrapper}
+                            spacing={2}>
+                            <Typography variant="h6" marked="left" gutterBottom>
+                                Legal
+                            </Typography>
+                            <ul className={classes.list}>
+                                <li className={classes.listItem}>
+                                    <Link href="/premium-themes/onepirate/terms/">Terms</Link>
+                                </li>
+                                <li className={classes.listItem}>
+                                    <Link href="/premium-themes/onepirate/privacy/">Privacy</Link>
+                                </li>
+                            </ul>
+                        </Grid>
                     </Grid>
-                    <Grid item md={4}>
+
+                    <Grid item md={4} >
+                    <Grid container
+                            direction="column"
+                            justify="center"
+                            alignItems='center'
+                            className={classes.iconsWrapper}
+                            spacing={2}>
                         <Typography variant="h6" marked="left" gutterBottom>
                             Language
-            </Typography>
+                        </Typography>
                         <TextField
                             select
                             SelectProps={{
@@ -130,25 +146,26 @@ export default function AppFooter() {
                             ))}
                         </TextField>
                     </Grid>
-                    <Grid item >
+                    </Grid>
+
+                    <Grid item sm={12} container justify="center">
                         <Typography variant="caption">
                             {'Icons made by '}
                             <Link href="https://www.freepik.com" rel="sponsored" title="Freepik">
                                 Freepik
-              </Link>
+                            </Link>
                             {' from '}
                             <Link href="https://www.flaticon.com" rel="sponsored" title="Flaticon">
                                 www.flaticon.com
-              </Link>
+                            </Link>
                             {' is licensed by '}
                             <Link
                                 href="https://creativecommons.org/licenses/by/3.0/"
                                 title="Creative Commons BY 3.0"
                                 target="_blank"
-                                rel="noopener noreferrer"
-                            >
+                                rel="noopener noreferrer">
                                 CC 3.0 BY
-              </Link>
+                            </Link>
                         </Typography>
                     </Grid>
                 </Grid>

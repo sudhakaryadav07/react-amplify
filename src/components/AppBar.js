@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = (theme) => ({
     root: {
         color: theme.palette.common.white,
-        position:'fixed'
       },
     title: {
         fontSize: 24,
@@ -44,7 +43,7 @@ const styles = (theme) => ({
 function Appbar(props) {
         const { classes } = props;
         return (
-                <AppBar elevation={0} position="static" className={classes.root}>
+                <AppBar elevation={0} position="fixed" className={classes.root}>
                     <Toolbar className={classes.toolbar}>
                         <div className={classes.left} />
                         <Link
