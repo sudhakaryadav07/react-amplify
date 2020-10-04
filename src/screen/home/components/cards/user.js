@@ -1,15 +1,17 @@
 import React from 'react';
 import { Card, CardHeader, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
 
-const user = ({ data, i }) => {
+const user = ({ data, history }) => {
     return (
-        <Card style={{backgroundColor:'ghostwhite', margin: 10, maxWidth: 345, position: 'relative' }}>
-            <CardHeader title={data.name} subheader={data.title} />
+        <Card
+            onClick={() => history.push({ pathname: '/blog', state: { selectedUser: data } })}
+            style={{ backgroundColor: 'ghostwhite', margin: 10, maxWidth: 345, position: 'relative' }}>
+            <CardHeader title={data.firstName + " " + data.lastName} subheader={data.title} />
             <CardActionArea>
                 <CardMedia>
                     <img
                         alt=""
-                        src={require(`../../../../icons/${data.name}.jpg`)}
+                        src={require(`../../../../icons/${data.firstName + " " + data.lastName}.jpg`)}
                         style={{ width: '100%', height: 180 }}
                     />
                 </CardMedia>

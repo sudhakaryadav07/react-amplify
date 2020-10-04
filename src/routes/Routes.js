@@ -8,7 +8,7 @@ const history = createBrowserHistory();
 class PublicRoutes extends Component {
 
     renderRoutes() {
-        window.onpopstate = function (event) { history.go(1); };
+        // window.onpopstate = function (event) { history.go(1); };
         return (
             <Switch>
                 <Route exact path="/" component={HomeScreen} />

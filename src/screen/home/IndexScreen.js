@@ -49,7 +49,7 @@ class Home extends Component {
         super(props);
         this.state = {
             search: "",
-            intrest: "",
+            interest: "",
             gKeyLoader: false,
             users: USER,
             message: "Vow to stop worrying and start loving."
@@ -86,12 +86,12 @@ class Home extends Component {
                 );
 
             } else {
-                this.setState({ intrest: e.target.value });
+                this.setState({ interest: e.target.value });
                 filteredUser = USER.filter(item => {
-                    let intrest = item.intrest.filter(data =>
+                    let interest = item.interest.filter(data =>
                         data.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
                     )
-                    if (intrest.length > 0) {
+                    if (interest.length > 0) {
                         return item;
                     }
                     return null;
@@ -106,19 +106,13 @@ class Home extends Component {
         }
     }
 
-    renderAppBar() {
-        return (
-            <AppBar />
-        );
-    }
-
     renderUser() {
         let { users } = this.state;
         return users.map((data, i) => {
             return (
                 <UserCard
                     key={i}
-                    i={i}
+                   history={this.props.history}
                     data={data}
                 />
             );
@@ -136,10 +130,10 @@ class Home extends Component {
 
     render() {
         let { classes } = this.props;
-        let { message, intrest, search } = this.state;
+        let { message, interest, search } = this.state;
         return (
             <Fragment>
-                {this.renderAppBar()}
+                <AppBar />
                 <section className={classes.section1}>
                     <img
                         src={require('../../icons/inspire.jpg')}
@@ -162,10 +156,10 @@ class Home extends Component {
                                 <TextField
                                     style={{ width: '30%', marginLeft: '7%' }}
                                     size="small"
-                                    name="intrest"
-                                    value={intrest}
+                                    name="interest"
+                                    value={interest}
                                     id="outlined-basic"
-                                    label="Intrest"
+                                    label="Interest"
                                     variant="outlined"
                                     onChange={this.handleChange} />
                                 <TextField

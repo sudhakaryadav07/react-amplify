@@ -8,7 +8,7 @@ const styles = (theme) => ({
         color: theme.palette.common.white,
       },
     title: {
-        fontSize: 24,
+        fontSize: 24
     },
     toolbar: {
         justifyContent: 'space-between',
@@ -53,7 +53,7 @@ function Appbar(props) {
                             className={classes.title}
                             href="/premium-themes/onepirate/"
                         >
-                            {'INSPIRE'}
+                            {'WE INSPIRE'}
                         </Link>
                         <div className={classes.right}>
                             <Link
