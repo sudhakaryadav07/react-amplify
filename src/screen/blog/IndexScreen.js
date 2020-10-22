@@ -1,30 +1,9 @@
-import React, { Component, Fragment } from 'react';
-import { Grid, Chip, withStyles, Typography, IconButton } from '@material-ui/core';
-import { Star, Twitter, LinkedIn } from '@material-ui/icons';
-import { AppBar, AppFooter, WithRoot } from '../../components/index';
+import React, { Component } from "react";
+import { Button, Container, Row, Col, UncontrolledTooltip } from "reactstrap";
+import { Footer, AppBar } from '../../components/index';
 
-const materialStyles = theme => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-        flexWrap: 'nowrap',
-        transform: 'translateZ(0)',
-    },
-    title: {
-        color: theme.palette.primary.light,
-    },
-    titleBar: {
-        background:
-            'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-    }
-})
+class ProfilePage extends Component {
 
-class Blog extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,8 +12,11 @@ class Blog extends Component {
     }
 
     UNSAFE_componentWillMount() {
-        document.addEventListener('scroll', this.handleDrag, true)
         this.initState();
+    }
+
+    componentDidMount() {
+        document.addEventListener('scroll', this.handleDrag, true)
     }
 
     handleDrag = () => {
@@ -70,6 +52,9 @@ class Blog extends Component {
         }
     }
 
+    refreshComponent = async (key) => this.setState({ [key]: null });
+    resetComponent = async (key) => this.setState({ [key]: null });
+
     initState = async () => {
         try {
             this.setState({ selectedUser: this.props.location.state.selectedUser })
@@ -78,116 +63,156 @@ class Blog extends Component {
         }
     }
 
-    refreshComponent = async (key) => this.setState({ [key]: null });
-    resetComponent = async (key) => this.setState({ [key]: null });
-
-
     render() {
         let { selectedUser } = this.state;
         let { firstName, lastName, title, videos, summary, books, interest } = selectedUser;
         return (
-            <Fragment>
+            <>
                 <AppBar />
-                {selectedUser ? <section style={{ marginTop: '5%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                    <Grid sm={9} container item justify="center" >
-                        <Grid container item sm={6}>
-                            <Grid container justify="flex-start" alignItems="flex-end">
-                                {interest.map((item, i) => <Chip
-                                    key={i}
-                                    style={{ cursor: 'pointer', marginRight: 10, backgroundColor: '#1a8af9', color: "white" }}
-                                    icon={<Star style={{ color: 'white' }} />}
-                                    label={item.charAt(0).toUpperCase() + item.slice(1)} />)}
-                            </Grid>
-                            <Grid container justify="flex-start" alignItems="flex-end">
-                                <Typography variant="h2" style={{ color: "black", fontFamily: 'Graphik Black","Arial Black",Sans-Serif', padding: '5px 0px 5px 0px' }}>
-                                    {firstName + " " + lastName}
-                                </Typography>
-                            </Grid>
-                            <Grid container justify="flex-start" alignItems="flex-start" style={{ padding: '0px 0px 5px 0px' }}>
-                                <Typography variant="h5">
-                                    {title}
-                                </Typography>
-                            </Grid>
-                            <Grid container justify="flex-start" alignItems="flex-start" style={{ padding: '0px 0px 5px 0px' }}>
-                                <IconButton>
-                                    <LinkedIn style={{ fontSize: 33, color: '#1a8af9' }} />
-                                </IconButton>
-                                <IconButton>
-                                    <Twitter style={{ fontSize: 33, color: '#1a8af9' }} />
-                                </IconButton>
-                            </Grid>
-                        </Grid>
-                        <Grid item sm={6}><img
-                            alt=""
-                            src={require(`../../icons/${firstName+" "+lastName}.jpg`)}
-                            style={{ width: '100%', height: 300 }}
-                        /></Grid>
-                    </Grid>
-                </section> : "Loading..."}
-                <section style={{ display: 'flex', justifyContent: 'center', backgroundColor: '#f2f2f2', paddingBottom: '1%' }}>
-                    <Grid sm={9} container item justify="flex-start" >
-                        <Grid sm={10} container item justify="flex-start" >
-                            <Typography style={{ fontFamily: 'Graphik Regular","Arial",Sans-Serif', fontSize: 45, fontWeight: 'bold', lineHeight: '1.6em' }}>
-                                About {firstName}
-                            </Typography>
-                            <Typography variant="h5" style={{ fontFamily: 'Graphik Regular","Arial",Sans-Serif', fontSize: '1rem', lineHeight: '1.6em' }}>
-                                {summary}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </section>
-                <section style={{ display: 'flex', justifyContent: 'center', paddingBottom: '1%' }}>
-                    <Grid sm={12} container item justify="center">
-                        <Grid sm={9} container item justify="flex-start" >
-                            <Typography style={{ fontFamily: 'Graphik Regular","Arial",Sans-Serif', fontSize: 45, fontWeight: 'bold', lineHeight: '1.6em' }}>
-                                Watch {firstName}
-                            </Typography>
-                            <Grid sm={12} container spacing={2} item justify="space-evenly" >
-                                <div className="horizontal-scroll">
-                                    {videos.map((data, i) => {
-                                        return (
-                                            <div key={i} className="item">
-                                                <iframe
-                                                    title={i}
-                                                    width="400"
-                                                    height="220"
-                                                    src={data.title}
-                                                    frameBorder="0"
-                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                    allowFullScreen />
-                                            </div>
-                                        )
-                                    })}
+                <div className="wrapper" >
+                    <div className="page-header clear-filter page-header-small" filter-color="blue" >
+                        <div className="page-header-image" style={{ backgroundImage: "url(" + require("assets/img/bg5.jpg") + ")" }} ></div>
+                        <Container>
+                            <div className="photo-container" >
+                                <img alt="..." style={{ height: '15%', width: '15%', borderRadius: '50%' }} src={require(`../../icons/${firstName + " " + lastName}.jpg`)}></img>
+                            </div>
+                            <h3 className="title">{firstName + " " + lastName}</h3>
+                            <p className="category">{title}</p>
+                            <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                                <Col md="2">
+                                    <div className="social-description">
+                                        <h2>26</h2>
+                                        <p>Comments</p>
+                                    </div>
+                                </Col>
+                                <Col md="2">
+                                    <div className="social-description">
+                                        <h2>26</h2>
+                                        <p>Comments</p>
+                                    </div>
+                                </Col>
+                                <Col md="2">
+                                    <div className="social-description">
+                                        <h2>48</h2>
+                                        <p>Bookmarks</p>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>
+                </div>
+                <div className="section">
+                    <Container>
+                        <div className="button-container" style={{ marginTop: '-108px', textAlign: 'center' }}>
+                            <Button
+                                className="btn-round mr-1"
+                                color="info"
+                                href="#pablo"
+                                onClick={(e) => e.preventDefault()}
+                                size="lg"
+                            >
+                                Follow
+                            </Button>
+                            <Button
+                                className="btn-round btn-icon mr-1"
+                                color="default"
+                                href="#pablo"
+                                id="tooltip871723210"
+                                onClick={(e) => e.preventDefault()}
+                                size="lg"
+                            >
+                                <i className="fab fa-twitter"></i>
+                            </Button>
+                            <UncontrolledTooltip delay={0} target="tooltip871723210">
+                                Follow me on Twitter
+              </UncontrolledTooltip>
+                            <Button
+                                className="btn-round btn-icon"
+                                color="default"
+                                href="#pablo"
+                                id="tooltip259363830"
+                                onClick={(e) => e.preventDefault()}
+                                size="lg"
+                            >
+                                <i className="fab fa-instagram"></i>
+                            </Button>
+                            <UncontrolledTooltip delay={0} target="tooltip259363830">
+                                Follow me on Instagram
+              </UncontrolledTooltip>
+                        </div>
 
-                                </div>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </section>
-                <section style={{ display: 'flex', justifyContent: 'center', backgroundColor: '#f2f2f2', paddingBottom: '1%' }}>
-                    <Grid sm={12} container item justify="center">
-                        <Grid sm={9} container item justify="flex-start" >
-                            <Typography style={{ fontFamily: 'Graphik Regular","Arial",Sans-Serif', fontSize: 45, fontWeight: 'bold', lineHeight: '1.6em' }}>
-                                Recommended Books
-                            </Typography>
-                            <Grid sm={12} container spacing={2} item justify="space-evenly" >
-                                <div className="horizontal-scroll">
-                                    {books.map((data, i) => {
-                                        return (
-                                            <div className="item" key={i} style={{ width: 150, height: 210, marginRight: 20, backgroundImage: `url(${data.thumbnail})` }} />
-                                        )
-                                    })}
-                                </div>
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                        <div style={{ textAlign: 'center' }}>
+                            {interest.map((item, i) => <Button style={{ borderRadius: 20, fontSize: 12, padding: 8, backgroundColor: 'orange', margin: 10 }} key={i}>{interest[i]}</Button>)}
+                        </div>
+
+
+                        <h3 className="title" style={{ textAlign: 'center' }}>About me</h3>
+                        <h5 className="description text-center">
+                            {summary}
+                        </h5>
+                    </Container>
+                </div>
+                <section>
+                    <div className="page-header clear-filter page-header-verysmall">
+                        <div className="page-header-image" style={{ backgroundImage: "url(" + require("assets/img/bg43.jpg") + ")" }} ></div>
+                        <Row style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                            <Col md={11} >
+                                <h3 className="title" style={{ textAlign: 'center' }}>
+                                    Watch {firstName}
+                                </h3>
+                                <Col md={12}>
+                                    <div className="horizontal-scroll">
+                                        {videos.map((data, i) => {
+                                            return (
+                                                <div key={i} className="item" style={{ margin: '50px 40px 50px 40px' }}>
+                                                    <iframe
+                                                        style={{ borderRadius: 5 }}
+                                                        title={i}
+                                                        width="400"
+                                                        height="220"
+                                                        src={data.title}
+                                                        frameBorder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                        allowFullScreen />
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </Col>
+                            </Col>
+                        </Row>
+                    </div>
                 </section>
                 <section>
-                    <AppFooter />
+                    <div className="page-header clear-filter page-header-vvsmall" filter-color="red">
+                        <div className="page-header-image" style={{ backgroundImage: "url(" + require("assets/img/project16.jpg") + ")" }} ></div>
+                        <Row style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                            <Col md={11} >
+                                <h3 className="title" style={{ color: 'grey', textAlign: 'center' }}>
+                                    Recommended Books
+                                </h3>
+                                <Col md={12} container spacing={2} item justify="space-evenly" >
+                                    <div className="horizontal-scroll">
+                                        {books.map((data, i) => {
+                                            return (
+                                                <div className="item" key={i}
+                                                    style={{
+                                                        margin: '20px 10px 20px 10px',
+                                                        borderRadius: 2, width: 150, height: 210, marginRight: 20,
+                                                        backgroundImage: `url(${data.thumbnail})`
+                                                    }} />
+                                            )
+                                        })}
+                                    </div>
+                                </Col>
+                            </Col>
+                        </Row>
+                    </div>
                 </section>
-            </Fragment >
+                <Footer />
+            </>
         );
     }
 }
 
-export default WithRoot((withStyles(materialStyles))(Blog));
+export default ProfilePage;

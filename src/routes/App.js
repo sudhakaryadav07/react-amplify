@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Routes } from './index';
-import WifiOffIcon from '@material-ui/icons/WifiOff';
 
 class App extends Component {
 
@@ -56,7 +55,7 @@ class App extends Component {
         if (isDisconnected === true) {
             return (
                 <div style={{ textAlign: 'center', height: "100vh", backgroundColor: 'lightgrey' }}>
-                    <WifiOffIcon style={{ height: 80, width: 80, marginTop: '16%' }} color="primary" fontSize="large" />
+                    <i  style={{ height: 80, width: 80, marginTop: '16%' }} className="fab wifi"></i>
                     <p style={{ fontSize: 40 }}>No Internet Connection !</p>
                 </div>
             )

@@ -16,7 +16,7 @@ const USER = [
         firstName: "Julie",
         lastName: "Sweet",
         title: "CEO, Accenture",
-        shortSummary: "Julie Sweet is an American business executive. She is chief executive officer of Accenture, a multinational professional services company.",
+        shortSummary: "Julie Sweet is an American business executive. She is chief executive officer of Accenture.",
         summary: "Julie Sweet is chief executive officer of Accenture and serves on the company’s board of directors.\
                     Prior to becoming CEO in September 2019, Julie served as chief executive officer of Accenture’s business in North America,\
                     the company’s largest geographic market. Previously, she was Accenture’s general counsel, secretary and chief compliance\
@@ -75,7 +75,7 @@ const USER = [
         firstName: "Christine",
         lastName: "Lagarde",
         title: "President, European Central Bank",
-        shortSummary: "Christine Madeleine Odette Lagarde is a French politician and lawyer serving as President of the European Central Bank since November 2019.",
+        shortSummary: "Christine Madeleine Odette Lagarde is President of the European Central Bank.",
         interest: ['leadership', 'confidence', 'energy', 'generosity'],
         summary: "Christine Lagarde, (born January 1, 1956, Paris, France), French lawyer and politician who was the first woman to serve as France’s finance minister (2007–11)\
         as the managing director of the International Monetary Fund(IMF 2011–19), and as president of the European Central Bank(2019–).\
@@ -127,7 +127,7 @@ const USER = [
         firstName: "Aileen",
         lastName: "Lee",
         title: "Founder, Cowboy Ventures",
-        shortSummary: "Aileen Lee (born 1970) is a U.S. seed investor. A venture capital investor, she is the founder of Cowboy Ventures.",
+        shortSummary: "Aileen Lee is a venture capital investor and a founder of Cowboy Ventures.",
         interest: ['leadership', 'curiosity'],
         summary: "Lee is the founder of Cowboy Ventures, a venture firm that has invested in startups like Bloom Energy, Dollar Shave Club and Rent the Runway.\
         A thirteen-year veteran of storied firm Kleiner Perkins Caufield & Byers, Lee left in 2012 to found her own firm, Cowboy Ventures.\
@@ -179,7 +179,7 @@ const USER = [
         firstName: "Scarlett",
         lastName: "Johansson",
         title: "Actress And Singer",
-        shortSummary: "An American actress and singer. The world's highest-paid actress since 2018, she has made multiple appearances in the Forbes Celebrity 100.",
+        shortSummary: "Scarlett Johansson is a world's highest-paid actress actress and singer.",
         interest: ['acting', 'singing', 'musician'],
         summary: "Scarlett Johansson, (born November 22, 1984, New York City, New York, U.S.), American actress and singer whose acting\
          range earned her popular acclaim in a variety of genres, from period drama to thriller and action adventure.\
@@ -230,7 +230,7 @@ const USER = [
         firstName: "Angela",
         lastName: "Merkel",
         title: "Chancellor, Germany",
-        shortSummary: "Angela Dorothea Merkel (born 17 July 1954) is a German politician who has been Chancellor of Germany since 2005.",
+        shortSummary: "Angela Dorothea Merkel is a German politician who has been Chancellor of Germany.",
         interest: ['leadership', 'curiosity'],
         summary: "Angela Merkel, née Angela Dorothea Kasner, (born July 17, 1954, Hamburg, West Germany), German politician who in 2005 became\
          the first female chancellor of Germany.Merkel’s parents, Horst and Herlind Kasner, met in Hamburg, where her father was a theology student\
@@ -282,7 +282,7 @@ const USER = [
         firstName: "Nancy",
         lastName: "Pelosi",
         title: "Speaker, United States",
-        shortSummary: "Nancy Patricia Pelosi is an politician serving as a congresswoman from California and the speaker of the United States House of Representatives.",
+        shortSummary: "Nancy Patricia Pelosi is a speaker of the United States House of Representatives.",
         interest: ['leadership', 'curiosity'],
         summary: "Nancy Pelosi, née Nancy Patricia D’Alesandro, (born March 26, 1940, Baltimore, Maryland, U.S.), American Democratic politician\
         who was a congresswoman from California in the U.S. House of Representatives (1987– ), where she served as the first female speaker (2007–11; 2019– ).\
@@ -336,7 +336,7 @@ const USER = [
         firstName: "Ursula",
         lastName: "von der Leyen",
         title: "President, European Union",
-        shortSummary: "Ursula Gertrud von der Leyen is a German politician and the president of the European Commission.",
+        shortSummary: "Ursula Gertrud von der Leyen is a German politician, president of the European Commission.",
         interest: ['leadership', 'curiosity'],
         summary: "Ursula von der Leyen, née Ursula Albrecht, (born October 8, 1958, Brussels, Belgium), Belgian-born German politician who\
          was the first woman to serve as Germany’s minister of defense (2013–19). In July 2019 she became the first woman to be elected\
@@ -390,7 +390,7 @@ const USER = [
         firstName: "Sushma",
         lastName: "Swaraj",
         title: "Minister of External Affairs of India",
-        shortSummary: "A Indian politician and a Supreme Court lawyer. A senior leader of Bharatiya Janata Party, Swaraj served as the Minister of External Affairs of India.",
+        shortSummary: "Sushma Swaraj was Indian politician and a Supreme Court lawyer of India.",
         interest: ['leadership', 'curiosity'],
         summary: "Sushma Swaraj, née Sushma Sharma, (born February 14, 1952, Ambala, Haryana, India—died August 6, 2019, New Delhi), Indian\
          politician and government official who served in a variety of legislative and administrative posts at the state (Haryana) and national\
@@ -441,7 +441,7 @@ const USER = [
         firstName: "Melinda",
         lastName: "Gates",
         title: "Co-Chair, Bill & Melinda Gates Foundation",
-        shortSummary: "Melinda Ann Gates (born August 15, 1964) is an American philanthropist and a former general manager at Microsoft",
+        shortSummary: "Melinda Ann Gates is an philanthropist and a former general manager at Microsoft",
         interest: ['leadership', 'curiosity'],
         summary: "Melinda Gates, née Melinda Ann French, (born August 15, 1964, Dallas, Texas, U.S.), American businesswoman and\
          philanthropist who—with her husband, Microsoft Corporation cofounder Bill Gates—cofounded the charitable Bill & Melinda Gates Foundation.\
@@ -493,7 +493,7 @@ const USER = [
         firstName: "Abigail",
         lastName: "Johnson",
         title: "CEO, Fidelity Investments",
-        shortSummary: "A American billionaire businesswoman, president and chief executive officer of American investment firm Fidelity Investments.",
+        shortSummary: "Abigail Johnson is a president and chief executive officer of Fidelity Investments.",
         interest: ['leadership', 'curiosity'],
         summary: "Abigail Johnson has served as CEO of Fidelity Investments since 2014, when she took over for her father, and has been chairman since 2016.\
         Her grandfather, Edward Johnson II, founded the Boston-based mutual fund giant in 1946.\
@@ -545,7 +545,7 @@ const USER = [
         firstName: "Oprah",
         lastName: "Winfrey",
         title: "Entrepreneur, Personality, Philanthropist",
-        shortSummary: "Oprah Gail Winfrey (born January 29, 1954) is an American talk show host, television producer, actress, author, and philanthropist.",
+        shortSummary: "Oprah Gail Winfrey is atelevision producer, actress, author, and philanthropist.",
         interest: ['leadership', 'curiosity'],
         summary: "Oprah Winfrey has transitioned her hit talk show, which ran for 25 years, into a media and business empire.\
         The former news anchor built the reinvested profits from her talk show into $2 billion, according to Forbes estimates.\
@@ -597,7 +597,7 @@ const USER = [
         firstName: "Robyn Rihanna",
         lastName: "Fenty",
         title: "Musician",
-        shortSummary: "Robyn Rihanna Fenty (born February 20, 1988)[2] is a Barbadian singer, actress, businesswoman ad greatest artists of all time.",
+        shortSummary: "Robyn Rihanna Fenty is a singer, actress, businesswoman.",
         interest: ['leadership', 'curiosity', 'musician'],
         summary: "Rihanna, one of the most publicly charitable celebrities, has donated upwards of $8 million to coronavirus relief efforts.\
         She gave $1 million to New York's needy, $2.1 million to abuse victims in LA and $5 million to other charities through her Clara Lionel Foundation.\

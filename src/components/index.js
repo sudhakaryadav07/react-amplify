@@ -1,5 +1,5 @@
+import Header from './Header';
 import AppBar from './AppBar';
-import WithRoot from './WithRoot';
-import AppFooter from './AppFooter';
+import Footer from './Footer';
 
-export {AppBar,AppFooter,WithRoot}
+export {Header,AppBar,Footer}

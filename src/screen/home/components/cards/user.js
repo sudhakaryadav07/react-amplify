@@ -1,32 +1,35 @@
 import React from 'react';
-import { Card, CardHeader, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { Col, Card, Row, CardTitle, CardBody } from 'reactstrap';
 
 const user = ({ data, history }) => {
     return (
-        <Card
-            onClick={() => history.push({ pathname: '/blog', state: { selectedUser: data } })}
-            style={{ backgroundColor: 'ghostwhite', margin: 10, maxWidth: 345, position: 'relative' }}>
-            <CardHeader title={data.firstName + " " + data.lastName} subheader={data.title} />
-            <CardActionArea>
-                <CardMedia>
-                    <img
-                        alt=""
-                        src={require(`../../../../icons/${data.firstName + " " + data.lastName}.jpg`)}
-                        style={{ width: '100%', height: 180 }}
-                    />
-                </CardMedia>
-                <CardContent style={{ padding: 10 }}>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {data.shortSummary}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Typography variant="subtitle2" style={{ cursor: 'pointer' }}>
-                    Read More...
-        </Typography>
-            </CardActions>
-        </Card>
+        <Col className="ml-auto mr-auto" lg="7" xl="6" style={{cursor:'pointer'}} 
+            onClick={() => history.push({ pathname: '/blog', state: { selectedUser: data } })}>
+            <Card className="card-profile">
+                <Row>
+                    <Col md="5">
+                        <div className="card-image">
+                            <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                                <img
+                                    alt="..."
+                                    style={{ height: 180, width: 300 }}
+                                    src={require(`../../../../icons/${data.firstName + " " + data.lastName}.jpg`)}
+                                ></img>
+                            </a>
+                        </div>
+                    </Col>
+                    <Col md="7">
+                        <CardBody style={{ padding: '0px 10px 0px 10px' }}>
+                            <CardTitle tag="h3">{data.firstName + " " + data.lastName}</CardTitle>
+                            <h6 className="category text-info">{data.title}</h6>
+                            <p className="card-description">
+                                {data.shortSummary}
+                            </p>
+                        </CardBody>
+                    </Col>
+                </Row>
+            </Card>
+        </Col>
     );
 }
 
