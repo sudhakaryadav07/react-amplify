@@ -1,25 +1,29 @@
 import React from "react";
+import {Row,Col} from 'reactstrap';
 
 function AppBar({ message }) {
   return (
     <>
-      <div className="page-header clear-filter" >
+      <div className="page-header header-filter">
         <div
-          className="rellax-header rellax-header-buildings"
-          data-rellax-speed="0"
-        >
-          <div
-            className="page-header-image page-header-city"
-            style={{ backgroundImage: "url(" + require("assets/img/bg30.jpg") + ")" }}
-          ></div>
-        </div>
+          className="page-header-image"
+          style={{
+            backgroundImage: "url(" + require("assets/img/bg14.jpg") + ")",
+          }}
+        ></div>
         <h3
           style={{
-            display: 'flex', justifyContent: 'center', paddingTop: '15%',paddingRight:'20%',
+            display: 'flex', justifyContent: 'center', paddingTop: '20%',
             fontSize: 35, alignItems: 'center', fontFamily: 'fantasy',
-            color:'#ce6363',transform: 'rotate(-33deg)'
+            color: '#fff'
           }} data-rellax-speed="-1">
-          "{message}"
+
+          <Row>
+            <Col className="ml-auto mr-auto text-center" md="12">
+              <h6 >"{message}"</h6>
+            </Col>
+          </Row>
+
         </h3>
       </div>
     </>

@@ -14,9 +14,7 @@ const Footer = ({history}) => {
           <nav>
             <ul>
               <li>
-                <a
-                  href=""
-                >
+                <a style={{ cursor: 'pointer' }}  onClick={() => history.push('/')}>
                   WE INSPIRE
                 </a>
               </li>

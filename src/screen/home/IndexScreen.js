@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { MESSAGES, USER } from '../../data/data';
+import TagsInput from "react-tagsinput";
 import { Header, Footer, AppBar } from '../../components/index';
-import { Container, Row, Col, FormGroup, Input } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import { UserCard } from './components/cards/index';
 
 class Home extends Component {
@@ -10,6 +11,19 @@ class Home extends Component {
     this.state = {
       search: "",
       interest: "",
+      tags: ["Amsterdam",
+        "Washington",
+        "Sydney",
+        "Beijing","Amsterdam",
+        "Washington",
+        "Sydney",
+        "Beijing","Amsterdam",
+        "Washington",
+        "Sydney",
+        "Beijing","Amsterdam",
+        "Washington",
+        "Sydney",
+        "Beijing"],
       gKeyLoader: false,
       users: USER,
       message: "Vow to stop worrying and start loving."
@@ -66,6 +80,14 @@ class Home extends Component {
     }
   }
 
+  setTagsValue = async (value) => {
+    try {
+      this.setState({ tags: value });
+    } catch (e) {
+
+    }
+  }
+
   renderUser() {
     let { users } = this.state;
     return users.map((data, i) => {
@@ -80,7 +102,7 @@ class Home extends Component {
   }
 
   render() {
-    let { message, interest, search, gKeyLoader } = this.state;
+    let { message, tags, interest, search, gKeyLoader } = this.state;
     return (
       <>
         <AppBar />
@@ -89,26 +111,20 @@ class Home extends Component {
           <div className="team-3 section-image" style={{ backgroundImage: "url(" + require("assets/img/bg21.jpg") + ")" }}>
             <Container>
               <Row>
-                <Col className="ml-auto mr-auto text-center" md="4">
-                  <FormGroup >
-                    <Input
-                      className="homeinput"
-                      name="intrest"
-                      value={interest}
-                      placeholder="Search Intrest..."
-                      onChange={this.handleChange} />
-                  </FormGroup>
-                </Col>
-                <Col className="ml-auto mr-auto text-center" md="4">
-                  <FormGroup >
-                    <Input
-                      className="homeinput"
-                      name="search"
-                      value={search}
-                      placeholder="Search Name..."
-                      onChange={this.handleChange} />
-                  </FormGroup>
-                </Col>
+                  <Col md="10" >
+                    <TagsInput
+                    style={{backgroundColor:'#2CA8FF'}}
+                      tagProps={{
+                        className: "react-tagsinput-tag badge",
+                      }}
+                      onChange={(value) => this.setTagsValue(value)}
+                      value={tags}
+                      onlyUnique
+                    ></TagsInput>
+                  </Col>
+                  <Col md="2" >
+                   <Button title='Go' size="sm" style={{fontSize:12}}>Get My Role Model</Button>
+                  </Col>
               </Row>
             </Container>
             <Container>
