@@ -14,13 +14,13 @@ class Home extends Component {
       tags: ["Amsterdam",
         "Washington",
         "Sydney",
-        "Beijing","Amsterdam",
+        "Beijing", "Amsterdam",
         "Washington",
         "Sydney",
-        "Beijing","Amsterdam",
+        "Beijing", "Amsterdam",
         "Washington",
         "Sydney",
-        "Beijing","Amsterdam",
+        "Beijing", "Amsterdam",
         "Washington",
         "Sydney",
         "Beijing"],
@@ -102,7 +102,7 @@ class Home extends Component {
   }
 
   render() {
-    let { message, tags, interest, search, gKeyLoader } = this.state;
+    let { message, tags, gKeyLoader } = this.state;
     return (
       <>
         <AppBar />
@@ -111,20 +111,20 @@ class Home extends Component {
           <div className="team-3 section-image" style={{ backgroundImage: "url(" + require("assets/img/bg21.jpg") + ")" }}>
             <Container>
               <Row>
-                  <Col md="10" >
-                    <TagsInput
-                    style={{backgroundColor:'#2CA8FF'}}
-                      tagProps={{
-                        className: "react-tagsinput-tag badge",
-                      }}
-                      onChange={(value) => this.setTagsValue(value)}
-                      value={tags}
-                      onlyUnique
-                    ></TagsInput>
-                  </Col>
-                  <Col md="2" >
-                   <Button title='Go' size="sm" style={{fontSize:12}}>Get My Role Model</Button>
-                  </Col>
+                <Col md="10" >
+                  <TagsInput
+                    style={{ backgroundColor: '#2CA8FF' }}
+                    tagProps={{
+                      className: "react-tagsinput-tag badge",
+                    }}
+                    onChange={(value) => this.setTagsValue(value)}
+                    value={tags}
+                    onlyUnique
+                  ></TagsInput>
+                </Col>
+                <Col md="2" >
+                  <Button title='Go' size="sm" style={{ fontSize: 12 }}>Get My Role Model</Button>
+                </Col>
               </Row>
             </Container>
             <Container>

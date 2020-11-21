@@ -25,9 +25,7 @@ class ContactUs extends Component {
         this.state = {
             first1Focus: false,
             last1Focus: false,
-            email1Focus: false,
-            first2Focus: false,
-            email2Focus: false
+            email1Focus: false
         }
     }
 
@@ -41,7 +39,7 @@ class ContactUs extends Component {
     }
 
     render() {
-        let { first1Focus, last1Focus, email1Focus, first2Focus, email2Focus } = this.state;
+        let { first1Focus, last1Focus, email1Focus } = this.state;
         return (
             <>
                 <AppBar />

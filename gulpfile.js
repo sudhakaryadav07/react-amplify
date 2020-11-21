@@ -1,74 +1,23 @@
 const gulp = require("gulp");
 const gap = require("gulp-append-prepend");
 
-gulp.task("licenses", async function () {
-  // this is to add Creative Tim licenses in the production mode for the minified js
-  gulp
-    .src("build/static/js/*chunk.js", { base: "./" })
-    .pipe(
-      gap.prependText(`/*!
-
-=========================================================
-* Now UI Kit PRO React - v1.4.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-kit-pro-react
-* Copyright 2020 Creative Tim (http://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/`)
-    )
-    .pipe(gulp.dest("./", { overwrite: true }));
-
-  // this is to add Creative Tim licenses in the production mode for the minified html
-  gulp
-    .src("build/index.html", { base: "./" })
-    .pipe(
-      gap.prependText(`<!--
-
-=========================================================
-* Now UI Kit PRO React - v1.4.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-kit-pro-react
-* Copyright 2020 Creative Tim (http://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->`)
-    )
-    .pipe(gulp.dest("./", { overwrite: true }));
-
-  // this is to add Creative Tim licenses in the production mode for the minified css
-  gulp
-    .src("build/static/css/*chunk.css", { base: "./" })
-    .pipe(
-      gap.prependText(`/*!
-
-=========================================================
-* Now UI Kit PRO React - v1.4.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-kit-pro-react
-* Copyright 2020 Creative Tim (http://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/`)
-    )
-    .pipe(gulp.dest("./", { overwrite: true }));
-  return;
+gulp.task('sass', function () {
+  gulp.src('*.scss')
+      .pipe(sass())
+      .pipe(gulp.dest(function (f) {
+          return f.base;
+      }))
 });
+
+gulp.task('clean', function() {
+})
+
+gulp.task('watch', function() {
+  gulp.watch('*.scss', ['sass']);
+})
+
+
+gulp.task('default', function(done) { // <--- Insert `done` as a parameter here...
+  gulp.series('clean','sass', 'watch')
+  done(); // <--- ...and call it here.
+})

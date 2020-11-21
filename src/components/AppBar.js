@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
     Row,Col,
-    Collapse,
     NavLink,
     NavbarBrand,
     Navbar,
@@ -15,7 +14,6 @@ class AppBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            navbarOpen2: false
         }
     }
 
@@ -28,7 +26,6 @@ class AppBar extends Component {
     }
 
     render() {
-        let { navbarOpen2 } = this.state;
         return (
             <>
                 <div className="header-2">
