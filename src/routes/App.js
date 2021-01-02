@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Routes } from './index';
+import Amplify, { API, graphqlOperation } from 'aws-amplify'
+import awsExports from "../aws-exports";
+import {getRoleModelsByName} from '../graphql/queries'
+Amplify.configure(awsExports);
 
 class App extends Component {
 
@@ -8,17 +12,26 @@ class App extends Component {
         this.state = {
             isDisconnected: false
         }
+        this.test()
     }
 
     componentDidMount() {
         try {
+            // console.log("hello...1111111111")
             this.handleConnectionChange();
             window.addEventListener('online', this.handleConnectionChange);
             window.addEventListener('offline', this.handleConnectionChange);
-            this.handleComponentWillMount();
+            // this.handleComponentWillMount();
+            
         } catch (error) {
-
+            console.log(error)
         }
+    }
+
+    async test(){
+        console.log("hello...")
+        const todoData = await API.graphql(graphqlOperation(getRoleModelsByName, {name:'Kelly'}))
+        console.log(todoData)
     }
 
     componentWillUnmount() {
