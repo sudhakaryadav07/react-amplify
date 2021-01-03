@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Routes } from './index';
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
+import Amplify from 'aws-amplify';
 import awsExports from "../aws-exports";
-import {getRoleModelsByName} from '../graphql/queries'
 Amplify.configure(awsExports);
 
 class App extends Component {
@@ -12,26 +11,16 @@ class App extends Component {
         this.state = {
             isDisconnected: false
         }
-        this.test()
     }
 
     componentDidMount() {
         try {
-            // console.log("hello...1111111111")
             this.handleConnectionChange();
             window.addEventListener('online', this.handleConnectionChange);
             window.addEventListener('offline', this.handleConnectionChange);
-            // this.handleComponentWillMount();
-            
         } catch (error) {
             console.log(error)
         }
-    }
-
-    async test(){
-        console.log("hello...")
-        const todoData = await API.graphql(graphqlOperation(getRoleModelsByName, {name:'Kelly'}))
-        console.log(todoData)
     }
 
     componentWillUnmount() {
@@ -68,7 +57,7 @@ class App extends Component {
         if (isDisconnected === true) {
             return (
                 <div style={{ textAlign: 'center', height: "100vh", backgroundColor: 'lightgrey' }}>
-                    <i  style={{ height: 80, width: 80, marginTop: '16%' }} className="fab wifi"></i>
+                    <i style={{ height: 80, width: 80, marginTop: '16%' }} className="fab wifi"></i>
                     <p style={{ fontSize: 40 }}>No Internet Connection !</p>
                 </div>
             )

@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-    Button, Carousel,
-    CarouselItem,
-    CarouselIndicators, Container, Row, Col, UncontrolledTooltip
-} from "reactstrap";
+import { Button, Container, Row, Col, UncontrolledTooltip } from "reactstrap";
 import { Footer, AppBar } from '../../components/index';
 
 class ProfilePage extends Component {
@@ -98,8 +94,8 @@ class ProfilePage extends Component {
     };
 
     render() {
-        let { selectedUser, activeIndex } = this.state;
-        let { firstName, lastName, title, videos, summary, books, interest } = selectedUser;
+        let { selectedUser } = this.state;
+        let { name, title, images, summary, categories } = selectedUser;
         return (
             <>
                 <AppBar />
@@ -107,11 +103,11 @@ class ProfilePage extends Component {
                     <div className="page-header clear-filter page-header-small" filter-color="blue" >
                         <div className="page-header-image" style={{ backgroundImage: "url(" + require("assets/img/bg5.jpg") + ")" }} ></div>
                         <Container>
-                            <div className="photo-container" >
-                                <img alt="..." style={{ height: '15%', width: '15%', borderRadius: '50%' }} src={require(`../../icons/${firstName + " " + lastName}.jpg`)}></img>
+                            <div className="circular" >
+                                <img alt="..." style={{ minWidth: 250, borderRadius: '50%' }} src={images.length > 0 ? images[1] : ""}></img>
                             </div>
-                            <h3 className="title">{firstName + " " + lastName}</h3>
-                            <p className="category">{title}</p>
+                            <h3 className="title">{name}</h3>
+                            <p className="category">{title ? title : ""}</p>
                             <Row style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Col md="2">
                                     <div className="social-description">
@@ -176,23 +172,23 @@ class ProfilePage extends Component {
                         </div>
 
                         <div style={{ textAlign: 'center' }}>
-                            {interest.map((item, i) => <Button style={{ borderRadius: 20, fontSize: 12, padding: 8, backgroundColor: 'orange', margin: 10 }} key={i}>{interest[i]}</Button>)}
+                            {categories.map((item, i) => <Button style={{ borderRadius: 20, fontSize: 12, padding: 8, backgroundColor: 'orange', margin: 10 }} key={i}>{categories[i]}</Button>)}
                         </div>
 
 
                         <h3 className="title" style={{ textAlign: 'center' }}>About me</h3>
-                        <h5 className="description text-center">
+                        <h5 >
                             {summary}
                         </h5>
                     </Container>
                 </div>
-                <section>
+                {/* <section>
                     <div className="page-header clear-filter page-header-verysmall">
                         <div className="page-header-image" style={{ backgroundImage: "url(" + require("assets/img/bg43.jpg") + ")" }} ></div>
                         <Row style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                             <Col md={12} >
                                 <h3 className="title" style={{ textAlign: 'center' }}>
-                                    Watch {firstName}
+                                    Watch {name}
                                 </h3>
                                 <Col md={12} style={{ padding: 0 }}>
                                     <Carousel activeIndex={activeIndex} next={this.next} previous={this.previous}>
@@ -204,7 +200,7 @@ class ProfilePage extends Component {
                                         {videos.map((data, i) => {
                                             return (
                                                 <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={i}  >
-                                                    <div className="page-header header-filter" style={{ display: 'flex',minHeight:0, justifyContent: 'center', alignItems: 'center' }}>
+                                                    <div className="page-header header-filter" style={{ display: 'flex', minHeight: 0, justifyContent: 'center', alignItems: 'center' }}>
                                                         <div key={i} className="item" style={{ margin: '50px 40px 50px 40px' }}>
                                                             <iframe
                                                                 style={{ borderRadius: 5 }}
@@ -277,8 +273,8 @@ class ProfilePage extends Component {
                             </Col>
                         </Row>
                     </div>
-                </section>
-                <Footer history={this.props.history}/>
+                </section> */}
+                <Footer history={this.props.history} />
             </>
         );
     }

@@ -1,41 +1,36 @@
 import React, { Component } from 'react';
-import { MESSAGES, USER } from '../../data/data';
+import { API, graphqlOperation } from 'aws-amplify';
+import { MESSAGES } from '../../data/data';
 import TagsInput from "react-tagsinput";
 import { Header, Footer, AppBar } from '../../components/index';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button, Label, Input, FormGroup, Spinner } from 'reactstrap';
 import { UserCard } from './components/cards/index';
+import { getRoleModelsByName, getRoleModelsByCategories } from '../../graphql/queries'
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      users: [],
+      mode: "tag",
       search: "",
       interest: "",
-      tags: ["Amsterdam",
-        "Washington",
-        "Sydney",
-        "Beijing", "Amsterdam",
-        "Washington",
-        "Sydney",
-        "Beijing", "Amsterdam",
-        "Washington",
-        "Sydney",
-        "Beijing", "Amsterdam",
-        "Washington",
-        "Sydney",
-        "Beijing"],
       gKeyLoader: false,
-      users: USER,
+      tags: ["births"],
       message: "Vow to stop worrying and start loving."
     }
   }
+
+  refreshComponent = async (key) => this.setState({ [key]: key + Math.random() });
+  resetComponent = async (key) => this.setState({ [key]: null });
 
   UNSAFE_componentWillMount() {
     this.initState();
   }
 
-  initState = () => {
+  initState = async () => {
     try {
+      await this.handleRoleModelByCategory();
       setInterval(() => {
         this.setState({ message: MESSAGES[parseInt(Math.floor(Math.random() * 10))] })
       }, 5000);
@@ -44,45 +39,30 @@ class Home extends Component {
     }
   }
 
-  refreshComponent = async (key) => this.setState({ [key]: null });
-  resetComponent = async (key) => this.setState({ [key]: null });
+  setTagsValue = async (value) => this.setState({ tags: value });
 
-  handleChange = (e) => {
+  handleRoleModelByName = async (e) => {
     try {
-      this.refreshComponent('gKeyLoader');
+      await this.refreshComponent('gKeyLoader');
+      let { name } = this.state;
       let filteredUser = [];
-
-      if (e.target.name === "search") {
-        this.setState({ search: e.target.value });
-        filteredUser = USER.filter(item =>
-          item.firstName.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()) ||
-          item.lastName.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
-        );
-
-      } else {
-        this.setState({ interest: e.target.value });
-        filteredUser = USER.filter(item => {
-          let interest = item.interest.filter(data =>
-            data.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
-          )
-          if (interest.length > 0) {
-            return item;
-          }
-          return null;
-        }
-        );
-      }
-
+      const { data } = await API.graphql(graphqlOperation(getRoleModelsByName, { name: name }))
+      filteredUser = data.getRoleModelsByName;
       this.setState({ users: filteredUser });
-      this.resetComponent('gKeyLoader');
+      await this.resetComponent('gKeyLoader');
     } catch (e) {
 
     }
   }
 
-  setTagsValue = async (value) => {
+  handleRoleModelByCategory = async () => {
     try {
-      this.setState({ tags: value });
+      await this.refreshComponent('gKeyLoader');
+      let { tags } = this.state;
+      const { data } = await API.graphql(graphqlOperation(getRoleModelsByCategories, { categories: tags }));
+      let filteredUser = data.getRoleModelsByCategories;
+      this.setState({ users: filteredUser });
+      await this.resetComponent('gKeyLoader');
     } catch (e) {
 
     }
@@ -90,47 +70,95 @@ class Home extends Component {
 
   renderUser() {
     let { users } = this.state;
-    return users.map((data, i) => {
-      return (
-        <UserCard
-          key={i}
-          history={this.props.history}
-          data={data}
-        />
-      );
-    })
+    if (users && users.length > 0) {
+      return users.map((data, i) => {
+        return (
+          <UserCard
+            key={i}
+            history={this.props.history}
+            data={data}
+          />
+        );
+      })
+    }
   }
 
+  renderChooseRadio() {
+      return (
+        <Container style={{ paddingBottom: 10 }}>
+          <Row>
+            <Col md="10" >
+              <Row>
+                <Col md="3" >
+                  <FormGroup check style={{ margin: 0 }}>
+                    <Label check style={{ color: 'white' }}>
+                      <Input type="radio" name="radio1" value="tag" onChange={(e) => this.setState({ mode: e.target.value })} />
+                        Get You Role Model
+                    </Label>
+                  </FormGroup>
+                </Col>
+                <Col md="3" >
+                  <FormGroup check style={{ margin: 0 }}>
+                    <Label check style={{ color: 'white' }}>
+                      <Input type="radio" name="radio1" value="search" onChange={(e) => this.setState({ mode: e.target.value })} />
+                        Search By Name
+                    </Label>
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
+      );
+    } 
+
   render() {
-    let { message, tags, gKeyLoader } = this.state;
+    let { mode, message, tags, gKeyLoader } = this.state;
     return (
       <>
         <AppBar />
         <Header message={message} />
         <div className="wrapper">
           <div className="team-3 section-image" style={{ backgroundImage: "url(" + require("assets/img/bg21.jpg") + ")" }}>
+            {this.renderChooseRadio()}
             <Container>
-              <Row>
-                <Col md="10" >
-                  <TagsInput
-                    style={{ backgroundColor: '#2CA8FF' }}
-                    tagProps={{
-                      className: "react-tagsinput-tag badge",
-                    }}
-                    onChange={(value) => this.setTagsValue(value)}
-                    value={tags}
-                    onlyUnique
-                  ></TagsInput>
-                </Col>
-                <Col md="2" >
-                  <Button title='Go' size="sm" style={{ fontSize: 12 }}>Get My Role Model</Button>
-                </Col>
-              </Row>
+              {mode === "search" ?
+                <Row>
+                  <Col md="10" >
+                    <FormGroup>
+                      <Input className="homeinput" type="text" name="search" placeholder="Search" onChange={(e) => this.setState({ name: e.target.value })} />
+                    </FormGroup>
+                  </Col>
+                  <Col md="2" >
+                    <Button title='Go' size="sm" style={{ marginTop: 6, fontSize: 12 }} onClick={this.handleRoleModelByName}>Get My Role Model</Button>
+                  </Col>
+                </Row> :
+                <Row>
+                  <Col md="10" >
+                    <TagsInput
+                      style={{ backgroundColor: '#2CA8FF' }}
+                      tagProps={{
+                        className: "react-tagsinput-tag badge",
+                      }}
+                      onChange={(value) => this.setTagsValue(value)}
+                      value={tags}
+                      onlyUnique
+                    ></TagsInput>
+                  </Col>
+                  <Col md="2" >
+                    <Button title='Go' size="sm" style={{ marginTop: 6, fontSize: 12 }} onClick={this.handleRoleModelByCategory}>Get My Role Model</Button>
+                  </Col>
+                </Row>}
             </Container>
             <Container>
-              <Row style={{ height: 510, overflow: 'auto' }} key={gKeyLoader}>
-                {this.renderUser()}
-              </Row>
+              {!gKeyLoader ?
+                <Row style={{ height: 510, overflow: 'auto' }}>
+                  {this.renderUser()}
+                </Row>
+                :
+                <Row style={{ height: 510, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'auto' }}>
+                  <Spinner style={{color:'ghostwhite', width: '3rem', height: '3rem' }} />
+                </Row>}
             </Container>
           </div>
           <Footer history={this.props.history} />
