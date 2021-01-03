@@ -28,8 +28,8 @@ class AppBar extends Component {
     render() {
         return (
             <>
-                <div className="header-2">
-                    <Navbar className="navbar-transparent bg-info navbar-absolute" expand="lg" >
+                <div className="navbar-translate">
+                    <Navbar className="bg-white fixed-top navbar navbar-expand-lg" expand="lg" >
                         <Container>
                             <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
                                 GET MY ROLE MODEL
