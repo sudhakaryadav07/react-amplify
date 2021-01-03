@@ -22,7 +22,7 @@ const user = ({ data, history }) => {
                     <Col md="7">
                         <CardBody style={{ padding: '0px 10px 0px 10px' }}>
                             <CardTitle tag="h3">{data.name ? data.name : ""}</CardTitle>
-                            <h6 className="category text-info">{data.title ? data.title : "Title assdfsdfsf"}</h6>
+                            <h6 className="category text-info">{data.title ? data.title : "Default Title"}</h6>
                             <p className="card-description"
                              style={{paddingLeft:5,wordWrap: 'break-word',textAlign:'left', textOverflow: 'ellipsis',height: 110,overflow: 'hidden'}}>
                                 {data.summary ? data.summary : ""}...

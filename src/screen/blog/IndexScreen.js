@@ -107,7 +107,7 @@ class ProfilePage extends Component {
                                 <img alt="..." style={{ minWidth: 250, borderRadius: '50%' }} src={images.length > 0 ? images[1] : ""}></img>
                             </div>
                             <h3 className="title">{name}</h3>
-                            <p className="category">{title ? title : ""}</p>
+                            <p className="category">{title ? title : "Default Title"}</p>
                             <Row style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Col md="2">
                                     <div className="social-description">
