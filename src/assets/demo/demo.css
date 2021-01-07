@@ -35,6 +35,18 @@ position: relative!important;
   transition: all 1.25s cubic-bezier(.19, 0, .22, 1)!important;
 } 
 
+.jss2 {
+  background-color: #3f51b5;
+}
+
+.jss1 {
+  background: black !important;
+  bottom: 0;
+  height: 1px!important;
+  position: absolute;
+  transition: all 1.25s cubic-bezier(.19, 0, .22, 1)!important;
+}
+
 .tagcontainer {
   border: 1px solid #afafaf !important;
   border-radius: 5px;
