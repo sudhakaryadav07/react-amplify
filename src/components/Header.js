@@ -14,7 +14,7 @@ function AppBar({ message }) {
         <h3
           style={{
             display: 'flex', justifyContent: 'center', paddingTop: '20%',
-            fontSize: 35, alignItems: 'center', fontFamily: 'fantasy',
+            fontSize: 35, alignItems: 'center', fontFamily: 'sans-serif',
             color: '#fff'
           }} data-rellax-speed="-1">
 

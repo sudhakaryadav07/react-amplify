@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
+import TagsInput from "react-tagsinput";
+import { Paper, Tabs, Tab } from "@material-ui/core";
+import { Search } from "@material-ui/icons";
 import { API, graphqlOperation } from 'aws-amplify';
 import { MESSAGES } from '../../data/data';
-import TagsInput from "react-tagsinput";
-import { Header, Footer, AppBar } from '../../components/index';
-import { Container, Row, Col, Button, Label, Input, FormGroup, Spinner } from 'reactstrap';
 import { UserCard } from './components/cards/index';
+import { Header, Footer, AppBar } from '../../components/index';
 import { getRoleModelsByName, getRoleModelsByCategories } from '../../graphql/queries'
+import { Container, Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input,Spinner } from 'reactstrap';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       users: [],
-      mode: "tag",
-      search: "",
+      value: 0,
+      name: "",
       interest: "",
       gKeyLoader: false,
       tags: ["births"],
@@ -28,6 +30,21 @@ class Home extends Component {
     this.initState();
   }
 
+  componentDidMount() {
+    document.addEventListener('keypress', this.handleKeyPress, true)
+  }
+
+  handleKeyPress = (e) => {
+    if (this.state.value === 1 && e.key === "Enter") {
+      this.handleRoleModelByName();
+    }
+    if (this.state.name === "") {
+      this.handleRoleModelByCategory();
+    }
+
+    this.handleRoleModelByCategory();
+  }
+
   initState = async () => {
     try {
       await this.handleRoleModelByCategory();
@@ -39,7 +56,19 @@ class Home extends Component {
     }
   }
 
-  setTagsValue = async (value) => this.setState({ tags: value });
+  handleChange = (event, newValue) => this.setState({ value: newValue })
+
+  setTagsValue = async (value) => {
+    try {
+      this.setState({ tags: value });
+      await this.refreshComponent('gKeyLoader');
+      const { data } = await API.graphql(graphqlOperation(getRoleModelsByCategories, { categories: value }));
+      let filteredUser = data.getRoleModelsByCategories;
+      this.setState({ users: filteredUser });
+      await this.resetComponent('gKeyLoader');
+    } catch (e) {
+    }
+  }
 
   handleRoleModelByName = async (e) => {
     try {
@@ -83,60 +112,43 @@ class Home extends Component {
     }
   }
 
-  renderChooseRadio() {
-      return (
-        <Container style={{ paddingBottom: 10 }}>
-          <Row>
-            <Col md="10" >
-              <Row>
-                <Col md="3" >
-                  <FormGroup check style={{ margin: 0 }}>
-                    <Label check style={{ color: 'white' }}>
-                      <Input type="radio" name="radio1" value="tag" onChange={(e) => this.setState({ mode: e.target.value })} />
-                        Get You Role Model
-                    </Label>
-                  </FormGroup>
-                </Col>
-                <Col md="3" >
-                  <FormGroup check style={{ margin: 0 }}>
-                    <Label check style={{ color: 'white' }}>
-                      <Input type="radio" name="radio1" value="search" onChange={(e) => this.setState({ mode: e.target.value })} />
-                        Search By Name
-                    </Label>
-                  </FormGroup>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-      );
-    } 
-
   render() {
-    let { mode, message, tags, gKeyLoader } = this.state;
+    let { value, message, tags, gKeyLoader } = this.state;
     return (
       <>
         <AppBar />
         <Header message={message} />
-        <div className="wrapper">
-          <div className="team-3 section-image" style={{ backgroundImage: "url(" + require("assets/img/bg21.jpg") + ")" }}>
-            {this.renderChooseRadio()}
+        <Paper style={{ background: 'transparent', boxShadow: 'none',position:'relative', borderRadius: 0, margin: '0px 9%' }}>
+          <Tabs
+          style={{position:'relative', borderBottom: '1px solid grey',}}
+            value={value}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="Browse by Tag" style={{ outline: 'none' }} />
+            <Tab label="Browse by Name" style={{ outline: 'none' }} />
+          </Tabs>
+        </Paper>
+
+        <div className="wrapper" >
+          <div >
             <Container>
-              {mode === "search" ?
-                <Row>
-                  <Col md="10" >
-                    <FormGroup>
+              {value === 1 ?
+                <Row style={{ padding: '10px 15%' }}>
+                  <Col md="12" style={{ padding: 0 }}>
+                    <InputGroup style={{ marginBottom: 0 }}>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText className="grouptext"><Search fontSize="large" /></InputGroupText>
+                      </InputGroupAddon>
                       <Input className="homeinput" type="text" name="search" placeholder="Search" onChange={(e) => this.setState({ name: e.target.value })} />
-                    </FormGroup>
-                  </Col>
-                  <Col md="2" >
-                    <Button title='Go' size="sm" style={{ marginTop: 6, fontSize: 12 }} onClick={this.handleRoleModelByName}>Get My Role Model</Button>
+                    </InputGroup>
                   </Col>
                 </Row> :
-                <Row>
-                  <Col md="10" >
+                <Row style={{ padding: '10px 15%' }}>
+                  <Col md="12" className="tagcontainer">
                     <TagsInput
-                      style={{ backgroundColor: '#2CA8FF' }}
                       tagProps={{
                         className: "react-tagsinput-tag badge",
                       }}
@@ -144,9 +156,6 @@ class Home extends Component {
                       value={tags}
                       onlyUnique
                     ></TagsInput>
-                  </Col>
-                  <Col md="2" >
-                    <Button title='Go' size="sm" style={{ marginTop: 6, fontSize: 12 }} onClick={this.handleRoleModelByCategory}>Get My Role Model</Button>
                   </Col>
                 </Row>}
             </Container>
@@ -157,7 +166,7 @@ class Home extends Component {
                 </Row>
                 :
                 <Row style={{ height: 510, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'auto' }}>
-                  <Spinner style={{color:'ghostwhite', width: '3rem', height: '3rem' }} />
+                  <Spinner style={{ color: 'grey', width: '3rem', height: '3rem' }} />
                 </Row>}
             </Container>
           </div>

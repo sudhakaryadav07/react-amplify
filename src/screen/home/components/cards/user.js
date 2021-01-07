@@ -6,7 +6,7 @@ const user = ({ data, history }) => {
         <Col className="ml-auto mr-auto" lg="7" xl="6" style={{ cursor: 'pointer' }}
             onClick={() => history.push({ pathname: '/blog', state: { selectedUser: data } })}
             >
-            <Card className="card-profile">
+            <Card className="card-profile" style={{margin:'20px 0px 50px 0px',boxShadow:'0px 0px 11px 0px rgba(0, 0, 0, 0.2)'}}>
                 <Row>
                     <Col md="5">
                         <div className="card-image">
