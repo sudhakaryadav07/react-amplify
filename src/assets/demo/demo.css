@@ -21,8 +21,8 @@
   color: #585353 !important;
 }
 
-.MuiTabs-flexContainer .MuiTabs-centered{
-position: relative!important;
+.MuiTabs-flexContainer .MuiTabs-centered {
+  position: relative!important;
 }
 
 .PrivateTabIndicator-root-1 {
@@ -33,7 +33,7 @@ position: relative!important;
 
 .PrivateTabIndicator-colorPrimary-2 {
   transition: all 1.25s cubic-bezier(.19, 0, .22, 1)!important;
-} 
+}
 
 .jss2 {
   background-color: #3f51b5;
@@ -48,14 +48,28 @@ position: relative!important;
 }
 
 .tagcontainer {
-  border: 1px solid #afafaf !important;
+  border: 1px solid #afafaf;
   border-radius: 5px;
   height: 70px!important;
   width: '90%'!important;
 }
 
-.react-tagsinput-tag{
+.react-tagsinput {
+  display: inline-block!important;
+  padding: 4px 6px!important;
+  max-width: 86%!important;
+  line-height: 22px!important;
+  height: 100%!important;
+  overflow: auto!important;
+}
+
+.react-tagsinput-tag {
   color: black!important;
+ 
+}
+
+.react-tagsinput-input{
+  width:auto !important;
 }
 
 .homeinput {

@@ -29,11 +29,7 @@ const Footer = ({history}) => {
             </ul>
           </nav>
           <div className="copyright" id="copyright">
-            © {new Date().getFullYear()}, Designed by{" "}
-              Invision
-            . Coded by{" "}
-              Creative Tim
-            .
+            © {new Date().getFullYear()}
           </div>
         </Container>
       </footer>

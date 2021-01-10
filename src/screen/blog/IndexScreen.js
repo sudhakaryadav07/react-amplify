@@ -107,27 +107,7 @@ class ProfilePage extends Component {
                                 <img alt="..." style={{ minWidth: 250, borderRadius: '50%' }} src={images.length > 0 ? images[1] : ""}></img>
                             </div>
                             <h3 className="title">{name}</h3>
-                            <p className="category">{title ? title : "Default Title"}</p>
-                            <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                                <Col md="2">
-                                    <div className="social-description">
-                                        <h2>26</h2>
-                                        <p>Comments</p>
-                                    </div>
-                                </Col>
-                                <Col md="2">
-                                    <div className="social-description">
-                                        <h2>26</h2>
-                                        <p>Comments</p>
-                                    </div>
-                                </Col>
-                                <Col md="2">
-                                    <div className="social-description">
-                                        <h2>48</h2>
-                                        <p>Bookmarks</p>
-                                    </div>
-                                </Col>
-                            </Row>
+                            <p className="category" style={{padding:'5% 0px'}}>{title ? title : "Default Title"}</p>
                         </Container>
                     </div>
                 </div>
@@ -170,110 +150,12 @@ class ProfilePage extends Component {
                                 Follow me on Instagram
               </UncontrolledTooltip>
                         </div>
-
-                        <div style={{ textAlign: 'center' }}>
-                            {categories.map((item, i) => <Button style={{ borderRadius: 20, fontSize: 12, padding: 8, backgroundColor: 'orange', margin: 10 }} key={i}>{categories[i]}</Button>)}
-                        </div>
-
-
                         <h3 className="title" style={{ textAlign: 'center' }}>About me</h3>
                         <h5 >
-                            {summary}
+                            {summary.substring(1, summary.length-1)}
                         </h5>
                     </Container>
                 </div>
-                {/* <section>
-                    <div className="page-header clear-filter page-header-verysmall">
-                        <div className="page-header-image" style={{ backgroundImage: "url(" + require("assets/img/bg43.jpg") + ")" }} ></div>
-                        <Row style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                            <Col md={12} >
-                                <h3 className="title" style={{ textAlign: 'center' }}>
-                                    Watch {name}
-                                </h3>
-                                <Col md={12} style={{ padding: 0 }}>
-                                    <Carousel activeIndex={activeIndex} next={this.next} previous={this.previous}>
-                                        <CarouselIndicators
-                                            items={videos}
-                                            activeIndex={activeIndex}
-                                            onClickHandler={this.goToIndex}
-                                        />
-                                        {videos.map((data, i) => {
-                                            return (
-                                                <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={i}  >
-                                                    <div className="page-header header-filter" style={{ display: 'flex', minHeight: 0, justifyContent: 'center', alignItems: 'center' }}>
-                                                        <div key={i} className="item" style={{ margin: '50px 40px 50px 40px' }}>
-                                                            <iframe
-                                                                style={{ borderRadius: 5 }}
-                                                                title={i}
-                                                                width="600"
-                                                                height="320"
-                                                                src={data.title}
-                                                                frameBorder="0"
-                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                allowFullScreen />
-                                                        </div>
-                                                    </div>
-                                                </CarouselItem>
-                                            );
-                                        })}
-                                        <a
-                                            className="left carousel-control carousel-control-prev"
-                                            data-slide="prev"
-                                            href="#pablo"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                this.previous();
-                                            }}
-                                            role="button"
-                                        >
-                                            <span className="now-ui-icons arrows-1_minimal-left" />
-                                            <span className="sr-only">Previous</span>
-                                        </a>
-                                        <a
-                                            className="right carousel-control carousel-control-next"
-                                            data-slide="next"
-                                            href="#pablo"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                this.next();
-                                            }}
-                                            role="button"
-                                        >
-                                            <span className="now-ui-icons arrows-1_minimal-right" />
-                                            <span className="sr-only">Next</span>
-                                        </a>
-                                    </Carousel>
-                                </Col>
-                            </Col>
-                        </Row>
-                    </div>
-                </section>
-                <section>
-                    <div className="page-header clear-filter page-header-vvsmall" filter-color="red">
-                        <div className="page-header-image" style={{ backgroundImage: "url(" + require("assets/img/project16.jpg") + ")" }} ></div>
-                        <Row style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                            <Col md={11} >
-                                <h3 className="title" style={{ color: 'grey', textAlign: 'center' }}>
-                                    Recommended Books
-                                </h3>
-                                <Col md={12} container spacing={2} item justify="space-evenly" >
-                                    <div className="horizontal-scroll">
-                                        {books.map((data, i) => {
-                                            return (
-                                                <div className="item" key={i}
-                                                    style={{
-                                                        margin: '20px 10px 20px 10px',
-                                                        borderRadius: 2, width: 150, height: 210, marginRight: 20,
-                                                        backgroundImage: `url(${data.thumbnail})`
-                                                    }} />
-                                            )
-                                        })}
-                                    </div>
-                                </Col>
-                            </Col>
-                        </Row>
-                    </div>
-                </section> */}
                 <Footer history={this.props.history} />
             </>
         );

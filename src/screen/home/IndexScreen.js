@@ -6,8 +6,9 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { MESSAGES } from '../../data/data';
 import { UserCard } from './components/cards/index';
 import { Header, Footer, AppBar } from '../../components/index';
+
 import { getRoleModelsByName, getRoleModelsByCategories } from '../../graphql/queries'
-import { Container, Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input,Spinner } from 'reactstrap';
+import { Container, Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input, Spinner } from 'reactstrap';
 
 class Home extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Home extends Component {
       name: "",
       interest: "",
       gKeyLoader: false,
-      tags: ["births"],
+      tags: [],
       message: "Vow to stop worrying and start loving."
     }
   }
@@ -47,7 +48,9 @@ class Home extends Component {
 
   initState = async () => {
     try {
-      await this.handleRoleModelByCategory();
+      const { data } = await API.graphql(graphqlOperation(getRoleModelsByCategories, { categories: ['births'] }));
+      let filteredUser = data.getRoleModelsByCategories;
+      this.setState({ users: filteredUser });
       setInterval(() => {
         this.setState({ message: MESSAGES[parseInt(Math.floor(Math.random() * 10))] })
       }, 5000);
@@ -118,9 +121,9 @@ class Home extends Component {
       <>
         <AppBar />
         <Header message={message} />
-        <Paper style={{ background: 'transparent', boxShadow: 'none',position:'relative', borderRadius: 0, margin: '0px 9%' }}>
+        <Paper style={{ background: 'transparent', boxShadow: 'none', position: 'relative', borderRadius: 0, margin: '0px 9%' }}>
           <Tabs
-          style={{position:'relative', borderBottom: '1px solid grey',}}
+            style={{ position: 'relative', borderBottom: '1px solid grey', }}
             value={value}
             onChange={this.handleChange}
             indicatorColor="primary"
@@ -147,7 +150,24 @@ class Home extends Component {
                   </Col>
                 </Row> :
                 <Row style={{ padding: '10px 15%' }}>
-                  <Col md="12" className="tagcontainer">
+                  <Col md="1" className="tagcontainer"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRightWidth: 0,
+                      borderTopRightRadius: 0,
+                      borderBottomRightRadius: 0, padding: 0
+                    }}
+                  >
+                    <Search style={{ marginTop: '2%' }} fontSize="large" />
+                  </Col>
+                  <Col md="11" className="tagcontainer"
+                    style={{
+                      padding: 0, borderLeftWidth: 0,
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0
+                    }}>
                     <TagsInput
                       tagProps={{
                         className: "react-tagsinput-tag badge",
