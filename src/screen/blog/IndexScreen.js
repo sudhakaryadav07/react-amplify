@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container, Row, Col, UncontrolledTooltip } from "reactstrap";
+import { Button, Container, UncontrolledTooltip } from "reactstrap";
 import { Footer, AppBar } from '../../components/index';
 
 class ProfilePage extends Component {
@@ -95,7 +95,7 @@ class ProfilePage extends Component {
 
     render() {
         let { selectedUser } = this.state;
-        let { name, title, images, summary, categories } = selectedUser;
+        let { name, title, images, summary } = selectedUser;
         return (
             <>
                 <AppBar />

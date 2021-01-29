@@ -50,14 +50,14 @@
 .tagcontainer {
   border: 1px solid #afafaf;
   border-radius: 5px;
-  height: 70px!important;
+  height: 43px!important;
   width: '90%'!important;
 }
 
 .react-tagsinput {
   display: inline-block!important;
   padding: 4px 6px!important;
-  max-width: 86%!important;
+  max-width: 100%!important;
   line-height: 22px!important;
   height: 100%!important;
   overflow: auto!important;
@@ -76,8 +76,8 @@
   border: 1px solid #afafaf !important;
   border-radius: 5px!important;
   width: '900%'!important;
-  height: 70px!important;
-  font-size: 20px!important;
+  height: 43px!important;
+  font-size: 13!important;
   color: black !important;
   position: relative !important;
   line-height: normal !important;

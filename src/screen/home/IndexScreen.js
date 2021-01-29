@@ -8,7 +8,7 @@ import { UserCard } from './components/cards/index';
 import { Header, Footer, AppBar } from '../../components/index';
 
 import { getRoleModelsByName, getRoleModelsByCategories } from '../../graphql/queries'
-import { Container, Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input, Spinner } from 'reactstrap';
+import { Container, Row, Col, InputGroup, InputGroupAddon, Label, InputGroupText, Input, Spinner } from 'reactstrap';
 
 class Home extends Component {
   constructor(props) {
@@ -33,27 +33,30 @@ class Home extends Component {
 
   componentDidMount() {
     document.addEventListener('keypress', this.handleKeyPress, true)
+    document.addEventListener('click', this.loadInitialData, true)
   }
 
   handleKeyPress = (e) => {
-    if (this.state.value === 1 && e.key === "Enter") {
-      this.handleRoleModelByName();
+    if (this.state.value === 1 && e.target.value === "" && this.state.name === "") {
+      this.initState();
     }
-    if (this.state.name === "") {
+    else if (this.state.value === 1 && e.key === "Enter") {
+      this.handleRoleModelByName();
+    } else {
       this.handleRoleModelByCategory();
     }
-
-    this.handleRoleModelByCategory();
   }
 
   initState = async () => {
     try {
+      this.refreshComponent('gKeyLoader')
       const { data } = await API.graphql(graphqlOperation(getRoleModelsByCategories, { categories: ['births'] }));
-      let filteredUser = data.getRoleModelsByCategories;
+      let filteredUser = await data.getRoleModelsByCategories;
       this.setState({ users: filteredUser });
       setInterval(() => {
         this.setState({ message: MESSAGES[parseInt(Math.floor(Math.random() * 10))] })
       }, 5000);
+      this.resetComponent('gKeyLoader')
     } catch (e) {
 
     }
@@ -66,7 +69,7 @@ class Home extends Component {
       this.setState({ tags: value });
       await this.refreshComponent('gKeyLoader');
       const { data } = await API.graphql(graphqlOperation(getRoleModelsByCategories, { categories: value }));
-      let filteredUser = data.getRoleModelsByCategories;
+      let filteredUser = await data.getRoleModelsByCategories;
       this.setState({ users: filteredUser });
       await this.resetComponent('gKeyLoader');
     } catch (e) {
@@ -79,7 +82,7 @@ class Home extends Component {
       let { name } = this.state;
       let filteredUser = [];
       const { data } = await API.graphql(graphqlOperation(getRoleModelsByName, { name: name }))
-      filteredUser = data.getRoleModelsByName;
+      filteredUser = await data.getRoleModelsByName;
       this.setState({ users: filteredUser });
       await this.resetComponent('gKeyLoader');
     } catch (e) {
@@ -116,11 +119,16 @@ class Home extends Component {
   }
 
   render() {
-    let { value, message, tags, gKeyLoader } = this.state;
+    let { users, value, message, tags, gKeyLoader } = this.state;
     return (
       <>
         <AppBar />
         <Header message={message} />
+        <Row style={{ textAlign: 'center', padding: '10px 15%' }}>
+          <Col md="12" style={{ padding: 0 }}>
+            <Label style={{ fontSize: 30, marginBottom: 0 }}>SEARCH FOR YOUR ROLE MODEL</Label>
+          </Col>
+        </Row>
         <Paper style={{ background: 'transparent', boxShadow: 'none', position: 'relative', borderRadius: 0, margin: '0px 9%' }}>
           <Tabs
             style={{ position: 'relative', borderBottom: '1px solid grey', }}
@@ -130,7 +138,7 @@ class Home extends Component {
             textColor="primary"
             centered
           >
-            <Tab label="Browse by Tag" style={{ outline: 'none' }} />
+            <Tab label="Browse by Passion" style={{ outline: 'none' }} />
             <Tab label="Browse by Name" style={{ outline: 'none' }} />
           </Tabs>
         </Paper>
@@ -142,14 +150,14 @@ class Home extends Component {
                 <Row style={{ padding: '10px 15%' }}>
                   <Col md="12" style={{ padding: 0 }}>
                     <InputGroup style={{ marginBottom: 0 }}>
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText className="grouptext"><Search fontSize="large" /></InputGroupText>
+                      <InputGroupAddon addonType="prepend" style={{ height: 43 }}>
+                        <InputGroupText className="grouptext"><Search style={{ marginTop: '4%' }} fontSize="large" /></InputGroupText>
                       </InputGroupAddon>
                       <Input className="homeinput" type="text" name="search" placeholder="Search" onChange={(e) => this.setState({ name: e.target.value })} />
                     </InputGroup>
                   </Col>
                 </Row> :
-                <Row style={{ padding: '10px 15%' }}>
+                <Row style={{ padding: '10px 15%' }} >
                   <Col md="1" className="tagcontainer"
                     style={{
                       display: 'flex',
@@ -160,7 +168,7 @@ class Home extends Component {
                       borderBottomRightRadius: 0, padding: 0
                     }}
                   >
-                    <Search style={{ marginTop: '2%' }} fontSize="large" />
+                    <Search style={{ marginLeft: '5%', marginTop: '2%' }} fontSize="large" />
                   </Col>
                   <Col md="11" className="tagcontainer"
                     style={{
@@ -168,6 +176,7 @@ class Home extends Component {
                       borderTopLeftRadius: 0,
                       borderBottomLeftRadius: 0
                     }}>
+
                     <TagsInput
                       tagProps={{
                         className: "react-tagsinput-tag badge",
@@ -179,11 +188,15 @@ class Home extends Component {
                   </Col>
                 </Row>}
             </Container>
-            <Container>
+            <Container style={{ maxWidth: 1244 }}>
               {!gKeyLoader ?
-                <Row style={{ height: 510, overflow: 'auto' }}>
-                  {this.renderUser()}
-                </Row>
+                users.length === 0 ?
+                  <Row style={{ height: 510, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'auto' }}>
+                    <Label style={{ color: 'grey' }}>No Role Model Found !</Label>
+                  </Row>
+                  : <Row style={{ height: 510, overflow: 'auto' }}>
+                    {this.renderUser()}
+                  </Row>
                 :
                 <Row style={{ height: 510, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'auto' }}>
                   <Spinner style={{ color: 'grey', width: '3rem', height: '3rem' }} />

@@ -5,15 +5,15 @@ const user = ({ data, history }) => {
     return (
         <Col className="ml-auto mr-auto" lg="7" xl="6" style={{ cursor: 'pointer' }}
             onClick={() => history.push({ pathname: '/blog', state: { selectedUser: data } })}
-            >
-            <Card className="card-profile" style={{margin:'20px 0px 50px 0px',boxShadow:'0px 0px 11px 0px rgba(0, 0, 0, 0.2)'}}>
+        >
+            <Card className="card-profile" style={{ margin: '20px 0px 50px 0px', boxShadow: '0px 0px 11px 0px rgba(0, 0, 0, 0.2)' }}>
                 <Row>
                     <Col md="5">
-                        <div className="card-image">
-                            <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                        <div >
+                            <a href="#image" onClick={(e) => e.preventDefault()}>
                                 <img
                                     alt="..."
-                                    style={{ minWidth:250 }}
+                                    style={{ minWidth: 264 }}
                                     src={data ? data.images.length > 0 ? data.images[1] : "" : ""}
                                 ></img>
                             </a>
@@ -21,10 +21,10 @@ const user = ({ data, history }) => {
                     </Col>
                     <Col md="7">
                         <CardBody style={{ padding: '0px 10px 0px 10px' }}>
-                            <CardTitle tag="h3">{data.name ? data.name : ""}</CardTitle>
+                            <CardTitle style={{ fontSize: 30, marginBottom: 6 }} >{data.name ? data.name.length >= 16 ? data.name.substring(0, 15) + "..." : data.name : ""}</CardTitle>
                             <h6 className="category text-info">{data.title ? data.title : "Default Title"}</h6>
                             <p className="card-description"
-                             style={{paddingLeft:5,wordWrap: 'break-word',textAlign:'left', textOverflow: 'ellipsis',height: 110,overflow: 'hidden'}}>
+                                style={{ paddingLeft: 5, textAlign: 'left', height: 110, overflow: 'hidden', wordWrap: 'break-word', textOverflow: 'ellipsis' }}>
                                 {data.summary ? data.summary : ""}...
                             </p>
                         </CardBody>

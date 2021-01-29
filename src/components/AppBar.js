@@ -46,8 +46,6 @@ function AppBar() {
   });
   return (
     <>
-      {    console.log(collapseOpen, navbarColor, buyButtonColor)
-      }
       {collapseOpen ? (
         <div
           id="bodyClick"
