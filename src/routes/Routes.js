@@ -18,10 +18,6 @@ class PublicRoutes extends Component {
     }
 
     render() {
-        this.props.history.pushState(null, null, '/');
-        window.onpopstate = function (event) {
-            history.go(1);
-        };
         return (
             <Router history={history}>
                 {this.renderRoutes()}
