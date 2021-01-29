@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import { HomeScreen,ContactUsScreen, BlogScreen } from '../screen';
+import { HomeScreen, ContactUsScreen, BlogScreen } from '../screen';
 
 var createBrowserHistory = require("history").createBrowserHistory;
 const history = createBrowserHistory();
@@ -8,7 +8,6 @@ const history = createBrowserHistory();
 class PublicRoutes extends Component {
 
     renderRoutes() {
-        // window.onpopstate = function (event) { history.go(1); };
         return (
             <Switch>
                 <Route exact path="/" component={HomeScreen} />
@@ -19,6 +18,10 @@ class PublicRoutes extends Component {
     }
 
     render() {
+        this.props.history.pushState(null, null, '/');
+        window.onpopstate = function (event) {
+            history.go(1);
+        };
         return (
             <Router history={history}>
                 {this.renderRoutes()}

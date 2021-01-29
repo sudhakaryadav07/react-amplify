@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container, UncontrolledTooltip } from "reactstrap";
+import { Button, Container, Row, Col, CardTitle, UncontrolledTooltip } from "reactstrap";
 import { Footer, AppBar } from '../../components/index';
 
 class ProfilePage extends Component {
@@ -100,61 +100,25 @@ class ProfilePage extends Component {
             <>
                 <AppBar />
                 <div className="wrapper" >
-                    <div className="page-header clear-filter page-header-small" filter-color="blue" >
-                        <div className="page-header-image" style={{ backgroundImage: "url(" + require("assets/img/bg5.jpg") + ")" }} ></div>
-                        <Container>
-                            <div className="circular" >
-                                <img alt="..." style={{ minWidth: 250, borderRadius: '50%' }} src={images.length > 0 ? images[1] : ""}></img>
-                            </div>
-                            <h3 className="title">{name}</h3>
-                            <p className="category" style={{padding:'5% 0px'}}>{title ? title : "Default Title"}</p>
+                    <div className="page-header page-header-small" style={{ backgroundColor: 'grey', height: 680 }}>
+                        <Container style={{ maxWidth: '100%', backgroundColor: 'grey', marginTop: '5%' }}>
+                            <Row style={{ marginLeft: "10%", marginRight: '10%' }}>
+                                <Col md="4">
+                                    <div className="card-image">
+                                        <img alt="..." src={images.length > 0 ? images[1] : ""}></img>
+                                    </div>
+                                    <p className="card-description" style={{ textAlign: 'left', color: 'white', fontWeight: 500 }}>
+                                        {name ? name : "" + " & " + title ? title : ""}
+                                    </p>
+                                </Col>
+                                <Col md="8">
+                                    <p className="card-description" style={{ textAlign: 'left', color: 'white', fontWeight: 500 }}>
+                                        {summary.substring(1, summary.length - 1)}
+                                    </p>
+                                </Col>
+                            </Row>
                         </Container>
                     </div>
-                </div>
-                <div className="section">
-                    <Container>
-                        <div className="button-container" style={{ marginTop: '-108px', textAlign: 'center' }}>
-                            <Button
-                                className="btn-round mr-1"
-                                color="info"
-                                href="#pablo"
-                                onClick={(e) => e.preventDefault()}
-                                size="lg"
-                            >
-                                Follow
-                            </Button>
-                            <Button
-                                className="btn-round btn-icon mr-1"
-                                color="default"
-                                href="#pablo"
-                                id="tooltip871723210"
-                                onClick={(e) => e.preventDefault()}
-                                size="lg"
-                            >
-                                <i className="fab fa-twitter"></i>
-                            </Button>
-                            <UncontrolledTooltip delay={0} target="tooltip871723210">
-                                Follow me on Twitter
-              </UncontrolledTooltip>
-                            <Button
-                                className="btn-round btn-icon"
-                                color="default"
-                                href="#pablo"
-                                id="tooltip259363830"
-                                onClick={(e) => e.preventDefault()}
-                                size="lg"
-                            >
-                                <i className="fab fa-instagram"></i>
-                            </Button>
-                            <UncontrolledTooltip delay={0} target="tooltip259363830">
-                                Follow me on Instagram
-              </UncontrolledTooltip>
-                        </div>
-                        <h3 className="title" style={{ textAlign: 'center' }}>About me</h3>
-                        <h5 >
-                            {summary.substring(1, summary.length-1)}
-                        </h5>
-                    </Container>
                 </div>
                 <Footer history={this.props.history} />
             </>

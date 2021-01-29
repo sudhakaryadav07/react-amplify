@@ -14,20 +14,20 @@ import {
 function AppBar() {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [navbarColor, setNavbarColor] = React.useState(
-    (document.documentElement.scrollTop > 300 || document.body.scrollTop) > 300
+    (document.documentElement.scrollTop > 30 || document.body.scrollTop) > 30
       ? ""
       : " navbar-transparent"
   );
   const [buyButtonColor, setBuyButtonColor] = React.useState(
-    (document.documentElement.scrollTop > 300 || document.body.scrollTop) > 300
+    (document.documentElement.scrollTop > 30 || document.body.scrollTop) > 30
       ? "info"
       : "neutral"
   );
   React.useEffect(() => {
     const updateNavbarColor = () => {
       if (
-        document.documentElement.scrollTop > 300 ||
-        document.body.scrollTop > 300
+        document.documentElement.scrollTop > 30 ||
+        document.body.scrollTop > 30
       ) {
         setNavbarColor("");
         setBuyButtonColor("info");
