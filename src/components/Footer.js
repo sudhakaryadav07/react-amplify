@@ -1,20 +1,15 @@
-/*eslint-disable*/
 import React from "react";
-
-// reactstrap components
 import { Container } from "reactstrap";
 
-// core components
-
-const Footer = ({history}) => {
+const Footer = ({ history }) => {
   return (
     <>
-      <footer className="footer" data-background-color="black">
+      <footer className="footer" data-background-color="black" >
         <Container>
           <nav>
             <ul>
               <li>
-                <a style={{ cursor: 'pointer' }}  onClick={() => history.push('/')}>
+                <a style={{ cursor: 'pointer' }} onClick={() => history.push('/')}>
                   WE INSPIRE
                 </a>
               </li>

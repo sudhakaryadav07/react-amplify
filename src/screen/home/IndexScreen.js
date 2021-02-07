@@ -124,87 +124,100 @@ class Home extends Component {
       <>
         <AppBar />
         <Header message={message} />
-        <Row style={{ textAlign: 'center', padding: '10px 15%' }}>
-          <Col md="12" style={{ padding: 0 }}>
-            <Label style={{ fontSize: 30, marginBottom: 0 }}>SEARCH FOR YOUR ROLE MODEL</Label>
-          </Col>
-        </Row>
-        <Paper style={{ background: 'transparent', boxShadow: 'none', position: 'relative', borderRadius: 0, margin: '0px 9%' }}>
-          <Tabs
-            style={{ position: 'relative', borderBottom: '1px solid grey', }}
-            value={value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="Browse by Passion" style={{ outline: 'none' }} />
-            <Tab label="Browse by Name" style={{ outline: 'none' }} />
-          </Tabs>
-        </Paper>
 
         <div className="wrapper" >
-          <div >
-            <Container>
-              {value === 1 ?
-                <Row style={{ padding: '10px 15%' }}>
-                  <Col md="12" style={{ padding: 0 }}>
-                    <InputGroup style={{ marginBottom: 0 }}>
-                      <InputGroupAddon addonType="prepend" style={{ height: 43 }}>
-                        <InputGroupText className="grouptext"><Search style={{ marginTop: '4%' }} fontSize="large" /></InputGroupText>
-                      </InputGroupAddon>
-                      <Input className="homeinput" type="text" name="search" placeholder="Search" onChange={(e) => this.setState({ name: e.target.value })} />
-                    </InputGroup>
-                  </Col>
-                </Row> :
-                <Row style={{ padding: '10px 15%' }} >
-                  <Col md="1" className="tagcontainer"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderRightWidth: 0,
-                      borderTopRightRadius: 0,
-                      borderBottomRightRadius: 0, padding: 0
-                    }}
-                  >
-                    <Search style={{ marginLeft: '5%', marginTop: '2%' }} fontSize="large" />
-                  </Col>
-                  <Col md="11" className="tagcontainer"
-                    style={{
-                      padding: 0, borderLeftWidth: 0,
-                      borderTopLeftRadius: 0,
-                      borderBottomLeftRadius: 0
-                    }}>
+          <div
+            className="page-header-image"
+            style={{
+              position: 'absolute',
+              height: '110%',
+              width: '100%',
+              zIndex: '-1',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+              backgroundImage: "url(" + require("assets/img/bg53.jpeg") + ")",
+            }}
+          />
 
-                    <TagsInput
-                      tagProps={{
-                        className: "react-tagsinput-tag badge",
-                      }}
-                      onChange={(value) => this.setTagsValue(value)}
-                      value={tags}
-                      onlyUnique
-                    ></TagsInput>
-                  </Col>
-                </Row>}
-            </Container>
-            <Container style={{ maxWidth: 1244 }}>
-              {!gKeyLoader ?
-                users.length === 0 ?
-                  <Row style={{ height: 510, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'auto' }}>
-                    <Label style={{ color: 'grey' }}>No Role Model Found !</Label>
-                  </Row>
-                  : <Row style={{ height: 510, overflow: 'auto' }}>
-                    {this.renderUser()}
-                  </Row>
-                :
+          <Row style={{ textAlign: 'center', padding: '10px 15%' }}>
+            <Col md="12" style={{ padding: 0 }}>
+              <Label style={{ fontSize: 30, marginBottom: 0 }}>SEARCH FOR YOUR ROLE MODEL</Label>
+            </Col>
+          </Row>
+          <Paper style={{ background: 'transparent', boxShadow: 'none', position: 'relative', borderRadius: 0, margin: '0px 9%' }}>
+            <Tabs
+              style={{ position: 'relative', borderBottom: '1px solid grey', }}
+              value={value}
+              onChange={this.handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              centered
+            >
+              <Tab label="Browse by Passion" style={{ outline: 'none' }} />
+              <Tab label="Browse by Name" style={{ outline: 'none' }} />
+            </Tabs>
+          </Paper>
+
+
+          <Container>
+            {value === 1 ?
+              <Row style={{ padding: '10px 15%' }}>
+                <Col md="12" style={{ padding: 0 }}>
+                  <InputGroup style={{ marginBottom: 0 }}>
+                    <InputGroupAddon addonType="prepend" style={{ height: 43 }}>
+                      <InputGroupText className="grouptext"><Search style={{ marginTop: '4%' }} fontSize="large" /></InputGroupText>
+                    </InputGroupAddon>
+                    <Input className="homeinput" type="text" name="search" placeholder="Search" onChange={(e) => this.setState({ name: e.target.value })} />
+                  </InputGroup>
+                </Col>
+              </Row> :
+              <Row style={{ padding: '10px 15%' }} >
+                <Col md="1" className="tagcontainer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRightWidth: 0,
+                    borderTopRightRadius: 0,
+                    borderBottomRightRadius: 0, padding: 0
+                  }}
+                >
+                  <Search style={{ marginLeft: '5%', marginTop: '2%' }} fontSize="large" />
+                </Col>
+                <Col md="11" className="tagcontainer"
+                  style={{
+                    padding: 0, borderLeftWidth: 0,
+                    borderTopLeftRadius: 0,
+                    borderBottomLeftRadius: 0
+                  }}>
+
+                  <TagsInput
+                    tagProps={{
+                      className: "react-tagsinput-tag badge",
+                    }}
+                    onChange={(value) => this.setTagsValue(value)}
+                    value={tags}
+                    onlyUnique
+                  ></TagsInput>
+                </Col>
+              </Row>}
+          </Container>
+          <Container style={{ maxWidth: 1244 }}>
+            {!gKeyLoader ?
+              users.length === 0 ?
                 <Row style={{ height: 510, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'auto' }}>
-                  <Spinner style={{ color: 'grey', width: '3rem', height: '3rem' }} />
-                </Row>}
-            </Container>
-          </div>
-          <Footer history={this.props.history} />
+                  <Label style={{ color: 'grey' }}>No Role Model Found !</Label>
+                </Row>
+                : <Row style={{ height: 510, overflow: 'auto' }}>
+                  {this.renderUser()}
+                </Row>
+              :
+              <Row style={{ height: 510, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'auto' }}>
+                <Spinner style={{ color: 'grey', width: '3rem', height: '3rem' }} />
+              </Row>}
+          </Container>
         </div>
+        <Footer history={this.props.history} />
       </>
     );
   }

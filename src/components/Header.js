@@ -8,7 +8,7 @@ function AppBar({ message }) {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("assets/img/bg14.jpg") + ")",
+            backgroundImage: "url(" + require("assets/img/bg52.jpeg") + ")",
           }}
         ></div>
         <h3

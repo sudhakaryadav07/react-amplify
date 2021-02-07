@@ -100,8 +100,14 @@ class ProfilePage extends Component {
             <>
                 <AppBar />
                 <div className="wrapper" >
-                    <div className="page-header page-header-small" style={{ backgroundColor: 'grey', height: 680 }}>
-                        <Container style={{ maxWidth: '100%', backgroundColor: 'grey', marginTop: '5%' }}>
+                    <div className="page-header page-header-small" style={{ height: 680 }}>
+                        <div
+                            className="page-header-image"
+                            style={{
+                                backgroundImage: "url(" + require("assets/img/bg53.jpeg") + ")",
+                            }}
+                        />
+                        <Container style={{ maxWidth: '100%', marginTop: '5%' }}>
                             <Row style={{ marginLeft: "10%", marginRight: '10%' }}>
                                 <Col md="4">
                                     <div className="card-image">
