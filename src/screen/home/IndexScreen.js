@@ -135,7 +135,7 @@ class Home extends Component {
               zIndex: '-1',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
-              backgroundImage: "url(" + require("assets/img/bg53.jpeg") + ")",
+              backgroundImage: "url(" + require("assets/img/bg53.jpg") + ")",
             }}
           />
 

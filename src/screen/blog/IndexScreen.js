@@ -104,7 +104,7 @@ class ProfilePage extends Component {
                         <div
                             className="page-header-image"
                             style={{
-                                backgroundImage: "url(" + require("assets/img/bg53.jpeg") + ")",
+                                backgroundImage: "url(" + require("assets/img/bg53.jpg") + ")",
                             }}
                         />
                         <Container style={{ maxWidth: '100%', marginTop: '5%' }}>
