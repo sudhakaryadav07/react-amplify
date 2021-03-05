@@ -6,7 +6,7 @@ const user = ({ data, history }) => {
         <Col className="ml-auto mr-auto" lg="7" xl="6" style={{ cursor: 'pointer' }}
             onClick={() => history.push({ pathname: '/blog', state: { selectedUser: data } })}
         >
-            <Card className="card-profile" style={{ margin: '20px 0px 50px 0px', boxShadow: '0px 0px 11px 0px rgba(0, 0, 0, 0.2)' }}>
+            <Card className="card-profile" style={{ margin: '20px 0px 50px 0px',backgroundColor: 'transparent', boxShadow: '0px 0px 11px 0px rgba(0, 0, 0, 0.2)' }}>
                 <Row>
                     <Col md="5">
                         <div >
@@ -24,7 +24,7 @@ const user = ({ data, history }) => {
                             <CardTitle style={{ fontSize: 30, marginBottom: 6 }} >{data.name ? data.name.length >= 16 ? data.name.substring(0, 15) + "..." : data.name : ""}</CardTitle>
                             <h6 className="category text-info">{data.title ? data.title : "Default Title"}</h6>
                             <p className="card-description"
-                                style={{ paddingLeft: 5, textAlign: 'left', height: 110, overflow: 'hidden', wordWrap: 'break-word', textOverflow: 'ellipsis' }}>
+                                style={{ paddingLeft: 5, textAlign: 'left',color:'#000', height: 110, overflow: 'hidden', wordWrap: 'break-word', textOverflow: 'ellipsis' }}>
                                 {data.summary ? data.summary : ""}...
                             </p>
                         </CardBody>
